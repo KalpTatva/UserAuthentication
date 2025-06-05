@@ -1,0 +1,36 @@
+@using static UserAuth.Repository.helpers.Enums
+
+
+@model List<UserAuth.Repository.Models.User>
+
+<div class="container overflow-auto">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="mb-4">User Details</h2>
+            <table class="table table-striped text-nowrap">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Email</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Phone</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>@user.UserId</td>
+                            <td>@user.Email</td>
+                            <td>@user.FirstName</td>
+                            <td>@user.LastName</td>
+                            <td>@user.PhoneNumber</td>
+                            <td>@((UserRole)user.Role)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
