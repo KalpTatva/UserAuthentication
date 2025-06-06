@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
+using UserAuth.Core.Filters;
 using UserAuth.Repository.implementation;
 using UserAuth.Repository.interfaces;
 using UserAuth.Repository.Models;
@@ -19,6 +20,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<UserAuthContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
+
+// custom filters
+// builder.Services.AddScoped<CustomAuthorizationFilter>();
 
 // service registration
 builder.Services.AddScoped<IUserService, UserService>();

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using UserAuth.Core.Filters;
 using UserAuth.Repository.Models;
 using UserAuth.Repository.ViewModels;
 using UserAuth.Service.interfaces;
@@ -25,7 +26,19 @@ public class DashboardController : Controller
     }
 
     // Method to get user details 
-    [Authorize(Roles = "Admin")]
+
+    // custom authorization filter
+    // [CustomAuthorizationFilter("User","Admin")]
+    // [CustomAuthorizationFilter("Admin")]
+    
+    // role based authorization
+    // [Authorize(Roles ="User,Admin")]
+    // [Authorize(Roles ="Admin")]
+
+    // policy based authorization
+    // [Authorize(Policy = "PublicAccess")]
+    // [Authorize(Policy = "AdminOnly")]
+    // [Authorize(Policy = "UserOnly")]
     [HttpGet]
     public async Task<IActionResult> GetAllUserDetails()
     {

@@ -1,1 +1,21 @@
 2025-06-06 15:46:07.024 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-06 18:17:26.814 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-06 18:17:27.072 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-06 18:18:09.371 +05:30 [WRN] 403 Forbidden error occurred.
+2025-06-06 18:18:20.852 +05:30 [WRN] 403 Forbidden error occurred.
+2025-06-06 18:19:01.469 +05:30 [WRN] 403 Forbidden error occurred.
+2025-06-06 18:19:08.467 +05:30 [WRN] 403 Forbidden error occurred.
+2025-06-06 18:19:15.490 +05:30 [WRN] 403 Forbidden error occurred.
+2025-06-06 18:19:31.390 +05:30 [WRN] 403 Forbidden error occurred.
+2025-06-06 18:19:40.045 +05:30 [WRN] 403 Forbidden error occurred.
+2025-06-06 18:19:43.216 +05:30 [WRN] 403 Forbidden error occurred.
+2025-06-06 18:20:53.360 +05:30 [WRN] 403 Forbidden error occurred.
+2025-06-06 18:22:25.456 +05:30 [WRN] 403 Forbidden error occurred.
+2025-06-06 18:23:02.700 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.InvalidOperationException: The AuthorizationPolicy named: 'AdminOnly , UserOnly' was not found.
+   at Microsoft.AspNetCore.Authorization.AuthorizationPolicy.CombineAsync(IAuthorizationPolicyProvider policyProvider, IEnumerable`1 authorizeData, IEnumerable`1 policies)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-06-06 18:23:46.858 +05:30 [WRN] 403 Forbidden error occurred.
