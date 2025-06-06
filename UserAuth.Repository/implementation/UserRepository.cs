@@ -14,11 +14,11 @@ public class UserRepository: IUserRepository
     }
 
     // DB call to get user by email
-    public async Task<User?> GetUserByEmail(string email)
+    public User? GetUserByEmail(string email)
     {
         try
         {
-            return await _context.Users.Where(x => x.Email.ToLower() == email).FirstOrDefaultAsync();
+            return _context.Users.Where(x => x.Email.ToLower() == email).FirstOrDefault();
         }
         catch(Exception ex)
         { 

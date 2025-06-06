@@ -12,7 +12,7 @@
             <div class="has-validation my-2 mb-4 w-100">
                 <div class="position-relative password-section">
                     <input type="password" class="form-control" id="exampleInputPassword"  placeholder="password" asp-for="Password" >
-                    <div class="eye" onclick="eyeActive()">
+                    <div class="eye">
                         <i class="bi bi-eye openeye eye inactive"></i>
                         <i class="bi bi-eye-slash closeeye eye active"></i>
                     </div>
@@ -38,3 +38,13 @@
         </form>
     </div>
 </div>
+
+
+@section scripts {  
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        window.successMessage = '@TempData["SuccessMessage"]';
+        window.errorMessage = '@TempData["ErrorMessage"]';
+    </script>
+    <script src="~/js/toastr_script.js"></script>
+}

@@ -45,6 +45,7 @@ public class HomeController : Controller
         }
         else
         {
+            _logger.LogInformation("User is not authenticated, redirecting to login page.");
             return View();
         }
     }
@@ -57,7 +58,7 @@ public class HomeController : Controller
         try{
             if(!ModelState.IsValid)
             {
-                TempData["error"] = "Invalid user credentials";
+                TempData["ErrorMessage"] = "Invalid user credentials";
                 return View(model);
             }
             ResponseTokenViewModel? response = await _userService.UserLogin(model);
@@ -66,7 +67,7 @@ public class HomeController : Controller
                 // setting jwt cookie 
                 CookieUtils.SetJwtCookie(Response, response.token, response.isPersistent);
                 
-                TempData["success"] = "User logged in successfully!";
+                TempData["SuccessMessage"] = "User logged in successfully!";
                 if(response.Role == UserRole.Admin.ToString())
                 {
                     return RedirectToAction("Index", "Dashboard");
@@ -75,17 +76,18 @@ public class HomeController : Controller
                 {
                     return RedirectToAction("IndexOfUser", "Dashboard");
                 }else {
-                    TempData["error"] = "Invalid user role. Please contact support.";
+                    TempData["ErrorMessage"] = "Invalid user role. Please contact support.";
                     return View(model);
                 }
             }
             res = response != null ? response.response ?? "" : "";
-            TempData["Error"] = res;
-            return View(model);
+            TempData["ErrorMessage"] = res;
+            return View(model); 
         }
         catch(Exception ex)
         {
-            TempData["error"] = ex.Message;
+            _logger.LogError(ex, "An error occurred during user login.");
+            TempData["ErrorMessage"] = ex.Message;
             return View(model);
         }
     }
@@ -95,6 +97,7 @@ public class HomeController : Controller
     public IActionResult Logout()
     {
         CookieUtils.ClearCookies(Response);
+        _logger.LogInformation("User logged out successfully.");
         return RedirectToAction("Index", "Home");
     }
 
@@ -120,7 +123,7 @@ public class HomeController : Controller
             if (response.IsSuccess)
             {
                 TempData["SuccessMessage"] = response.Message;
-                return View();
+                return RedirectToAction("Index","Home");
             }
             else
             {
@@ -131,6 +134,7 @@ public class HomeController : Controller
 
         }catch(Exception ex)
         {
+            _logger.LogError(ex, "An error occurred while processing the forget password request.");
             TempData["ErrorMessage"] = $"Error occurred while processing your request: {ex.Message}";
             return View(model);
         }
@@ -163,6 +167,7 @@ public class HomeController : Controller
         }
         catch(Exception ex)
         {
+            _logger.LogError(ex, "An error occurred while validating the reset password token.");
             TempData["ErrorMessage"] = $"Error occurred while processing your request: {ex.Message}";
             return RedirectToAction("ForgetPassword");
         }
@@ -170,7 +175,7 @@ public class HomeController : Controller
 
 
     [HttpPost]
-    public async Task<IActionResult> ResetPassword(ForgetPasswordViewModel model)
+    public IActionResult ResetPassword(ForgetPasswordViewModel model)
     {
         if (model == null || string.IsNullOrEmpty(model.Token) || string.IsNullOrEmpty(model.Email) || string.IsNullOrEmpty(model.Password))
         {
@@ -179,7 +184,7 @@ public class HomeController : Controller
         }
         try
         {
-            ResponsesViewModel response = await _userService.ResetPassword(model);
+            ResponsesViewModel response = _userService.ResetPassword(model);
             if (response.IsSuccess)
             {
                 TempData["SuccessMessage"] = response.Message;
@@ -193,6 +198,7 @@ public class HomeController : Controller
         }
         catch(Exception ex)
         {
+            _logger.LogError(ex, "An error occurred while resetting the password.");
             TempData["ErrorMessage"] = $"Error occurred while processing your request: {ex.Message}";
             return View(model);
         }
@@ -203,10 +209,12 @@ public class HomeController : Controller
     // error views
     public IActionResult Error403()
     {
+        _logger.LogWarning("403 Forbidden error occurred.");
         return View();
     }
     public IActionResult Error404()
     {
+        _logger.LogWarning("404 Not Found error occurred.");
         return View();
     }
 

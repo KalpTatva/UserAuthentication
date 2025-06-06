@@ -8,22 +8,13 @@
 
 <div id="UserContent"></div>
 
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function() {
-       $.ajax({
-            url: '/Dashboard/GetAllUserDetails',
-            type: 'GET',
-            success: function(data) {
-                console.log('User details fetched successfully:', data);
-                $('#UserContent').html(data);
-            },
-            error: function(xhr, status, error) {
-                console.error('Error fetching user details:', error);
-                $('#UserContent').html('<p class="text-danger">Failed to load user details.</p>');
-            }
-        });
-    });
-</script>
+ @section scripts {  
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        window.successMessage = '@TempData["SuccessMessage"]';
+        window.errorMessage = '@TempData["ErrorMessage"]';
+    </script>
+    <script src="~/js/toastr_script.js"></script>
+    <script src="~/js/dashBoard_script.js"> </script>
+}
 

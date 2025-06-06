@@ -2,6 +2,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
 using UserAuth.Repository.implementation;
 using UserAuth.Repository.interfaces;
 using UserAuth.Repository.Models;
@@ -63,6 +64,16 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("UserOnly", policy => policy.RequireRole("User"));
     
 });
+
+// serilog - Logger
+Log.Logger = new LoggerConfiguration()
+            .ReadFrom.Configuration(builder.Configuration)
+            .WriteTo.Console()
+            .WriteTo.File("Logs/log-.txt")
+            .CreateLogger();
+
+builder.Host.UseSerilog();
+builder.Services.AddSingleton<Serilog.ILogger>(Log.Logger);
 
 var app = builder.Build();
 

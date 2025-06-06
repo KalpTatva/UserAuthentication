@@ -11,6 +11,6 @@ public interface IUserService
     ResponsesViewModel ValidateResetPasswordToken(string token);
     
     // Method to reset the password
-    Task<ResponsesViewModel> ResetPassword(ForgetPasswordViewModel model);
+    ResponsesViewModel ResetPassword(ForgetPasswordViewModel model);
 
 }

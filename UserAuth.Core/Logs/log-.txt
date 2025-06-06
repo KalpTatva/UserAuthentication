@@ -1,0 +1,76 @@
+2025-06-06 15:43:36.026 +05:30 [INF] User profile is available. Using 'C:\Users\pca117\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-06-06 15:43:36.193 +05:30 [INF] Now listening on: http://localhost:5135
+2025-06-06 15:43:36.196 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-06 15:43:36.196 +05:30 [INF] Hosting environment: Development
+2025-06-06 15:43:36.196 +05:30 [INF] Content root path: D:\Tasks\UserAuthentication\UserAuth.Core
+2025-06-06 15:43:37.152 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5135/ - null null
+2025-06-06 15:43:37.168 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-06 15:43:37.269 +05:30 [INF] Executing endpoint 'UserAuth.Core.Controllers.HomeController.Index (UserAuth.Core)'
+2025-06-06 15:43:37.318 +05:30 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller UserAuth.Core.Controllers.HomeController (UserAuth.Core).
+2025-06-06 15:43:37.565 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-06 15:43:37.576 +05:30 [INF] Executing ViewResult, running view Index.
+2025-06-06 15:43:37.840 +05:30 [INF] Executed ViewResult - view Index executed in 267.249ms.
+2025-06-06 15:43:37.888 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5135/lib/bootstrap/dist/css/bootstrap.min.css - null null
+2025-06-06 15:43:37.888 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5135/_framework/aspnetcore-browser-refresh.js - null null
+2025-06-06 15:43:37.891 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5135/_framework/aspnetcore-browser-refresh.js - 200 13732 application/javascript; charset=utf-8 2.3326ms
+2025-06-06 15:43:37.894 +05:30 [INF] The file /lib/bootstrap/dist/css/bootstrap.min.css was not modified
+2025-06-06 15:43:37.894 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5135/lib/bootstrap/dist/css/bootstrap.min.css - 304 null text/css 5.5337ms
+2025-06-06 15:43:37.894 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5135/css/site.css?v=hc9AzqTQXm7fC-2pzVqJd4USCkgHrDlK5t2FKJ2DVuk - null null
+2025-06-06 15:43:37.894 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5135/lib/jquery-validation/dist/jquery.validate.min.js - null null
+2025-06-06 15:43:37.895 +05:30 [INF] The file /css/site.css was not modified
+2025-06-06 15:43:37.895 +05:30 [INF] The file /lib/jquery-validation/dist/jquery.validate.min.js was not modified
+2025-06-06 15:43:37.895 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5135/css/site.css?v=hc9AzqTQXm7fC-2pzVqJd4USCkgHrDlK5t2FKJ2DVuk - 304 null text/css 0.3872ms
+2025-06-06 15:43:37.895 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5135/lib/jquery-validation/dist/jquery.validate.min.js - 304 null text/javascript 0.39ms
+2025-06-06 15:43:37.895 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5135/js/site.js?v=Nt09jcFnYEZ0twCJ0DxDX3myw-kGA465lQGls1-kFDs - null null
+2025-06-06 15:43:37.895 +05:30 [INF] The file /js/site.js was not modified
+2025-06-06 15:43:37.895 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5135/js/site.js?v=Nt09jcFnYEZ0twCJ0DxDX3myw-kGA465lQGls1-kFDs - 304 null text/javascript 0.1978ms
+2025-06-06 15:43:37.896 +05:30 [INF] Executed action UserAuth.Core.Controllers.HomeController.Index (UserAuth.Core) in 576.1252ms
+2025-06-06 15:43:37.897 +05:30 [INF] Executed endpoint 'UserAuth.Core.Controllers.HomeController.Index (UserAuth.Core)'
+2025-06-06 15:43:37.905 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5135/ - 200 null text/html; charset=utf-8 1177.7353ms
+2025-06-06 15:43:37.934 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5135/lib/jquery/dist/jquery.min.js - null null
+2025-06-06 15:43:37.934 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5135/UserAuth.Core.styles.css?v=omarFwFQxnEyvYbb9UOl6SaFac1uDoPk9MTeiYd6TYg - null null
+2025-06-06 15:43:37.934 +05:30 [INF] The file /lib/jquery/dist/jquery.min.js was not modified
+2025-06-06 15:43:37.934 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5135/lib/jquery/dist/jquery.min.js - 304 null text/javascript 0.5045ms
+2025-06-06 15:43:37.935 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5135/lib/bootstrap/dist/js/bootstrap.bundle.min.js - null null
+2025-06-06 15:43:37.935 +05:30 [INF] The file /lib/bootstrap/dist/js/bootstrap.bundle.min.js was not modified
+2025-06-06 15:43:37.935 +05:30 [INF] The file /UserAuth.Core.styles.css was not modified
+2025-06-06 15:43:37.935 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5135/lib/bootstrap/dist/js/bootstrap.bundle.min.js - 304 null text/javascript 0.3272ms
+2025-06-06 15:43:37.935 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5135/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js - null null
+2025-06-06 15:43:37.935 +05:30 [INF] The file /lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js was not modified
+2025-06-06 15:43:37.935 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5135/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js - 304 null text/javascript 0.2625ms
+2025-06-06 15:43:37.936 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5135/js/toastr_script.js - null null
+2025-06-06 15:43:37.936 +05:30 [INF] The file /js/toastr_script.js was not modified
+2025-06-06 15:43:37.936 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5135/js/toastr_script.js - 304 null text/javascript 0.2295ms
+2025-06-06 15:43:37.935 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5135/UserAuth.Core.styles.css?v=omarFwFQxnEyvYbb9UOl6SaFac1uDoPk9MTeiYd6TYg - 304 null text/css 1.0661ms
+2025-06-06 15:44:10.784 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5135/ - application/x-www-form-urlencoded 254
+2025-06-06 15:44:10.786 +05:30 [INF] Executing endpoint 'UserAuth.Core.Controllers.HomeController.Index (UserAuth.Core)'
+2025-06-06 15:44:10.801 +05:30 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index(UserAuth.Repository.ViewModels.LoginViewModel) on controller UserAuth.Core.Controllers.HomeController (UserAuth.Core).
+2025-06-06 15:44:11.780 +05:30 [INF] Executed DbCommand (43ms) [Parameters=[@__email_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u.user_id, u.email, u.first_name, u.last_name, u.password, u.phone_number, u."Role", u.user_name
+FROM users AS u
+WHERE lower(u.email) = @__email_0
+LIMIT 1
+2025-06-06 15:44:11.796 +05:30 [INF] Executing ViewResult, running view Index.
+2025-06-06 15:44:11.801 +05:30 [INF] Executed ViewResult - view Index executed in 5.2182ms.
+2025-06-06 15:44:11.802 +05:30 [INF] Executed action UserAuth.Core.Controllers.HomeController.Index (UserAuth.Core) in 1000.29ms
+2025-06-06 15:44:11.802 +05:30 [INF] Executed endpoint 'UserAuth.Core.Controllers.HomeController.Index (UserAuth.Core)'
+2025-06-06 15:44:11.819 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5135/ - 200 null text/html; charset=utf-8 1034.9514ms
+2025-06-06 15:44:11.838 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5135/_framework/aspnetcore-browser-refresh.js - null null
+2025-06-06 15:44:11.839 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5135/_framework/aspnetcore-browser-refresh.js - 200 13732 application/javascript; charset=utf-8 0.5598ms
+2025-06-06 15:45:25.458 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5135/ - application/x-www-form-urlencoded 254
+2025-06-06 15:45:25.461 +05:30 [INF] Executing endpoint 'UserAuth.Core.Controllers.HomeController.Index (UserAuth.Core)'
+2025-06-06 15:45:25.461 +05:30 [INF] Route matched with {action = "Index", controller = "Home"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index(UserAuth.Repository.ViewModels.LoginViewModel) on controller UserAuth.Core.Controllers.HomeController (UserAuth.Core).
+2025-06-06 15:45:25.493 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__email_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u.user_id, u.email, u.first_name, u.last_name, u.password, u.phone_number, u."Role", u.user_name
+FROM users AS u
+WHERE lower(u.email) = @__email_0
+LIMIT 1
+2025-06-06 15:45:25.494 +05:30 [INF] Executing ViewResult, running view Index.
+2025-06-06 15:45:25.497 +05:30 [INF] Executed ViewResult - view Index executed in 3.4599ms.
+2025-06-06 15:45:25.498 +05:30 [INF] Executed action UserAuth.Core.Controllers.HomeController.Index (UserAuth.Core) in 36.7514ms
+2025-06-06 15:45:25.498 +05:30 [INF] Executed endpoint 'UserAuth.Core.Controllers.HomeController.Index (UserAuth.Core)'
+2025-06-06 15:45:25.500 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5135/ - 200 null text/html; charset=utf-8 41.7938ms
+2025-06-06 15:45:25.531 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5135/_framework/aspnetcore-browser-refresh.js - null null
+2025-06-06 15:45:25.532 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5135/_framework/aspnetcore-browser-refresh.js - 200 13732 application/javascript; charset=utf-8 1.4691ms
+2025-06-06 15:45:29.061 +05:30 [INF] Application is shutting down...
+2025-06-06 15:46:07.024 +05:30 [WRN] Failed to determine the https port for redirect.

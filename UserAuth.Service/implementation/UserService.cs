@@ -36,7 +36,7 @@ public class UserService : IUserService
     {
         try
         {
-            User? user = await _userRepository.GetUserByEmail(model.Email.Trim());
+            User? user = _userRepository.GetUserByEmail(model.Email.Trim());
     
             if(user!=null && BCrypt.Net.BCrypt.EnhancedVerify(model.Password, user.Password))
             {
@@ -109,7 +109,7 @@ public class UserService : IUserService
     {
         try
         {
-            User? user = await _userRepository.GetUserByEmail(email.ToEmail.Trim());
+            User? user = _userRepository.GetUserByEmail(email.ToEmail.Trim());
             if (user == null)
             {
                 return new ResponsesViewModel()
@@ -243,7 +243,7 @@ public class UserService : IUserService
     }
 
     // Method to reset the password
-    public async Task<ResponsesViewModel> ResetPassword(ForgetPasswordViewModel model)
+    public ResponsesViewModel ResetPassword(ForgetPasswordViewModel model)
     {
         try
         {
@@ -265,7 +265,7 @@ public class UserService : IUserService
             }
 
             // get user by email
-            User? user = await _userRepository.GetUserByEmail(model.Email.Trim());
+            User? user = _userRepository.GetUserByEmail(model.Email.Trim());
             if (user == null)
             {
                 return new ResponsesViewModel()
