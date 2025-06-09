@@ -20,4 +20,16 @@ public partial class User
     public string Password { get; set; } = null!;
 
     public int Role { get; set; }
+
+    public DateTime DateOfBirth { get; set; }
+
+    public int Age { get; set; }
+
+    public DateTime CreatedAt { get; set; }
+
+    public DateTime EditedAt { get; set; }
+
+    public DateTime? DeletedAt { get; set; }
+
+    public bool IsDeleted { get; set; }
 }

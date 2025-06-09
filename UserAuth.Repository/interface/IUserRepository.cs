@@ -1,4 +1,5 @@
 using UserAuth.Repository.Models;
+using UserAuth.Repository.ViewModels;
 
 namespace UserAuth.Repository.interfaces;
 
@@ -11,5 +12,7 @@ public interface IUserRepository
     PasswordResetRequest? GetPasswordResetRequestByToken(string token);
     void UpdateUser(User user);
     void UpdatePasswordResetRequest(PasswordResetRequest passwordResetRequest);
-
+    Task<bool> RegisterUser(RegisterUserViewModel model);
+    bool DeleteUser(int userId);
+    bool UpdateUserSP(User user);
 }

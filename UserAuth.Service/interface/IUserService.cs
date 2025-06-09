@@ -12,5 +12,17 @@ public interface IUserService
     
     // Method to reset the password
     ResponsesViewModel ResetPassword(ForgetPasswordViewModel model);
+    
+    // Method for registering a new user
+    Task<ResponsesViewModel> RegisterUser(RegisterUserViewModel model);
+
+    // method for getting user by id
+    User GetUserById(int userId);
+    
+    // soft delete user
+    ResponsesViewModel DeleteUser(int userId);
+
+    // method for updating user details
+    ResponsesViewModel UpdateUser(User user);
 
 }

@@ -1,7 +1,9 @@
+using System.Data;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Npgsql;
 using Serilog;
 using UserAuth.Core.Filters;
 using UserAuth.Repository.implementation;
@@ -13,6 +15,12 @@ using UserAuth.Service.interfaces;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+//<summery>
+//In ASP.NET Core, we can configure the MVC (Model-View-Controller) and Razor Pages services by calling methods 
+// such as AddControllers(), AddMvc(), AddControllersWithViews(), and AddRazorPages() on the IServiceCollection. 
+// When building an ASP.NET Core application, choosing the right service configuration method is crucial for 
+// optimizing functionality and performance
+// </summery>
 builder.Services.AddControllersWithViews();
 
 
@@ -20,6 +28,12 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<UserAuthContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
+
+// npg sql connection for dapper
+builder.Services.AddScoped<IDbConnection>(sp => 
+    new NpgsqlConnection(builder.Configuration.GetConnectionString("DefaultConnection"))
+);
+
 
 // custom filters
 // builder.Services.AddScoped<CustomAuthorizationFilter>();

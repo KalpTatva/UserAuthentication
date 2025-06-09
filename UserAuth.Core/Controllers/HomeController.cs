@@ -21,7 +21,7 @@ public class HomeController : Controller
         _userService = userService;
     }
 
-
+    #region login
     // index method for redirection based on user role
     public IActionResult Index()
     {
@@ -101,10 +101,11 @@ public class HomeController : Controller
         return RedirectToAction("Index", "Home");
     }
 
+    #endregion
+    #region reset password
 
 
     // forget password ( restting the password )
-
     public IActionResult ForgetPassword()
     {
         return View();
@@ -204,7 +205,49 @@ public class HomeController : Controller
         }
     }
 
+    #endregion
 
+    #region Register
+
+    // method for user registration
+    [HttpGet]
+    public IActionResult RegisterUser()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> RegisterUser(RegisterUserViewModel model)
+    {
+        if (model == null || !ModelState.IsValid)
+        {
+            TempData["ErrorMessage"] = "Invalid user registration details.";
+            return View(model);
+        }
+        try
+        {
+            ResponsesViewModel response = await _userService.RegisterUser(model);
+            if (response.IsSuccess)
+            {
+                TempData["SuccessMessage"] = response.Message;
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                TempData["ErrorMessage"] = response.Message;
+                return View(model);
+            }
+            
+        }
+        catch(Exception ex)
+        {
+            _logger.LogError(ex, "An error occurred during user registration.");
+            TempData["ErrorMessage"] = $"Error occurred while processing your request: {ex.Message}";
+            return View(model);
+        }
+    }
+
+    #endregion
 
     // error views
     public IActionResult Error403()

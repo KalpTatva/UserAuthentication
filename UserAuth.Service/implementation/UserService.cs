@@ -2,6 +2,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using UserAuth.Repository.interfaces;
@@ -327,4 +328,201 @@ public class UserService : IUserService
         }
     }
 
+
+    // Method to register a new user
+    public async Task<ResponsesViewModel> RegisterUser(RegisterUserViewModel model)
+    {
+        try
+        {
+            // check if model is null or empty
+            if (model == null)
+            {
+                return new ResponsesViewModel()
+                {
+                    IsSuccess = false,
+                    Message = "Invalid request" // when model is null or empty
+                };
+            }
+
+            // check if user already exists
+            User? existingUser = _userRepository.GetUserByEmail(model.Email.Trim());
+            if (existingUser != null)
+            {
+                return new ResponsesViewModel()
+                {
+                    IsSuccess = false,
+                    Message = "User already exists" // when user already exists
+                };
+            }
+
+            // check if user is +18 years old
+            if (model.DateOfBirth > DateTime.Now.AddYears(-18))
+            {
+                return new ResponsesViewModel()
+                {
+                    IsSuccess = false,
+                    Message = "User must be at least 18 years old" // when user is not 18 years old
+                };
+            }
+
+            // create new user
+            model.Password = BCrypt.Net.BCrypt.EnhancedHashPassword(model.Password);
+            bool response = await _userRepository.RegisterUser(model);
+           
+            if (!response)
+            {
+                return new ResponsesViewModel()
+                {
+                    IsSuccess = false,
+                    Message = "User registration failed" // when user registration fails
+                };
+            }
+            return new ResponsesViewModel()
+            {
+                IsSuccess = true,
+                Message = "User registered successfully" // when user is registered successfully
+            };
+        }
+        catch (Exception ex)
+        {
+            return new ResponsesViewModel()
+            {
+                IsSuccess = false,
+                Message = $"Error 500 : Internal Server Error {ex.Message}"
+            };
+        }
+    }
+
+
+    // edit users
+    public User GetUserById(int userId)
+    {
+        try
+        {
+            User? user = _userRepository.GetUserById(userId);
+            if (user == null)
+            {
+                throw new Exception("User not found");
+            }
+            return user;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception($"Error 500 : Internal Server Error {ex.Message}");
+        }
+    }
+
+    // delete user (soft delete)
+    public ResponsesViewModel DeleteUser(int userId)
+    {
+        try
+        {
+            User? user = _userRepository.GetUserById(userId);
+            if (user == null)
+            {
+                return new ResponsesViewModel()
+                {
+                    IsSuccess = false,
+                    Message = "User not found" // when user is not found
+                };
+            }
+
+            if(user.Role == (int)UserRole.Admin)
+            {
+                return new ResponsesViewModel()
+                {
+                    IsSuccess = false,
+                    Message = "Admin user cannot be deleted" // when trying to delete admin user
+                };
+            }
+
+            // soft delete user using sp
+            bool res = _userRepository.DeleteUser(userId);
+            if (!res)
+            {
+                return new ResponsesViewModel()
+                {
+                    IsSuccess = false,
+                    Message = "User deletion failed" // when user deletion fails
+                };
+            }
+
+            return new ResponsesViewModel()
+            {
+                IsSuccess = true,
+                Message = "User deleted successfully" // when user is deleted successfully
+            };
+        }
+        catch (Exception ex)
+        {
+            return new ResponsesViewModel()
+            {
+                IsSuccess = false,
+                Message = $"Error 500 : Internal Server Error {ex.Message}"
+            };
+        }
+    }
+
+    // Method to update user details
+    public ResponsesViewModel UpdateUser(User user)
+    {
+        try
+        {
+            // check if user is null
+            if (user == null)
+            {
+                return new ResponsesViewModel()
+                {
+                    IsSuccess = false,
+                    Message = "Invalid request" // when user is null
+                };
+            }
+
+            // check if user exists
+            User? existingUser = _userRepository.GetUserByEmail(user.Email.Trim());
+            if (existingUser == null)
+            {
+                return new ResponsesViewModel()
+                {
+                    IsSuccess = false,
+                    Message = "User not found" // when user is not found
+                };
+            }
+
+            // check if user is +18 years old
+            if (user.DateOfBirth > DateTime.Now.AddYears(-18))
+            {
+                return new ResponsesViewModel()
+                {
+                    IsSuccess = false,
+                    Message = "User must be at least 18 years old" // when user is not 18 years old
+                };
+            }
+
+            // update user stored procedure
+            bool res = _userRepository.UpdateUserSP(user);
+            if (!res)
+            {
+                return new ResponsesViewModel()
+                {
+                    IsSuccess = false,
+                    Message = "User update failed" // when user update fails
+                };
+            }
+            
+            return new ResponsesViewModel()
+            {
+                IsSuccess = true,
+                Message = "User updated successfully" // when user is updated successfully
+            };
+        }
+        catch (Exception ex)
+        {
+            return new ResponsesViewModel()
+            {
+                IsSuccess = false,
+                Message = $"Error 500 : Internal Server Error {ex.Message}"
+            };
+        }
+    }
 }
