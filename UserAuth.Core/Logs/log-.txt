@@ -195,3 +195,4 @@ System.InvalidOperationException: The AuthorizationPolicy named: 'AdminOnly , Us
 2025-06-09 17:48:58.553 +05:30 [WRN] Failed to determine the https port for redirect.
 2025-06-09 17:57:35.471 +05:30 [INF] User is not authenticated, redirecting to login page.
 2025-06-09 17:57:44.569 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-09 17:57:50.547 +05:30 [INF] User is not authenticated, redirecting to login page.
