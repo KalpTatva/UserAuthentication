@@ -10,17 +10,21 @@ $(document).ready(function() {
     });
 
     function fetchUsers(){
+        $('.loader').show(); 
         $.ajax({
             url: '/Dashboard/GetAllUserDetails',
             type: 'GET',
             success: function(data) {
-                $('#UserContent').html(data);
+            $('#UserContent').html(data);
+            $('.loader').hide(); 
             },
             error: function(xhr, status, error) {
-                console.error('Error fetching user details:', error);
-                $('#UserContent').html('<p class="text-danger">Failed to load user details.</p>');
+            console.error('Error fetching user details:', error);
+            $('#UserContent').html('<p class="text-danger">Failed to load user details.</p>');
+            $('.loader').hide(); 
             }
         });
+        
     }
 
 
@@ -102,5 +106,24 @@ $(document).ready(function() {
         });
     });
 
+
+    $(document).on('input', '.DateOfBirthEdit', function () {
+        var dob = new Date($(this).val());
+        var today = new Date();
+        var age = today.getFullYear() - dob.getFullYear();
+        var m = today.getMonth() - dob.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+            age--;
+        }
+        $('.AgeCalculation2').val(age);
+        if(age < 18){
+            $('.DOBValidationSpan2').text('Age must be at least 18 years.');
+            $('.EditUserBtn').prop('disabled', true);
+        } else {
+            $('.DOBValidationSpan2').text('');
+            $('.EditUserBtn').prop('disabled', false);
+        }
+    });
+    
     fetchUsers();
  });

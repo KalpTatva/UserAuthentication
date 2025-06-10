@@ -1,0 +1,100 @@
+2025-06-10 09:07:41.378 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-10 09:10:08.787 +05:30 [INF] User logged out successfully.
+2025-06-10 09:10:08.800 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-10 09:10:08.818 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.ArgumentOutOfRangeException: Token a000000 is not valid in the scope of module System.ModuleHandle. (Parameter 'methodToken')
+   at System.ModuleHandle.ResolveMethodHandleInternal(RuntimeModule module, Int32 methodToken, ReadOnlySpan`1 typeInstantiationContext, ReadOnlySpan`1 methodInstantiationContext)
+   at System.ModuleHandle.ResolveMethodHandle(Int32 methodToken, RuntimeTypeHandle[] typeInstantiationContext, RuntimeTypeHandle[] methodInstantiationContext)
+   at System.Reflection.RuntimeCustomAttributeData..ctor(RuntimeModule scope, MetadataToken caCtorToken, ConstArray& blob)
+   at System.Reflection.RuntimeCustomAttributeData.GetCustomAttributes(RuntimeModule module, Int32 tkTarget)
+   at System.Reflection.NullabilityInfoContext.Create(PropertyInfo propertyInfo)
+   at Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata.InitializeTypeInformation()
+   at Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadata..ctor(IModelMetadataProvider provider, ICompositeMetadataDetailsProvider detailsProvider, DefaultMetadataDetails details, DefaultModelBindingMessageProvider modelBindingMessageProvider)
+   at Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider.CreateModelMetadata(DefaultMetadataDetails entry)
+   at Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider.GetMetadataForProperties(Type modelType)
+   at Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadata.get_Properties()
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ExpressionMetadataProvider.FromLambdaExpression[TModel,TResult](Expression`1 expression, ViewDataDictionary`1 viewData, IModelMetadataProvider metadataProvider)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ModelExpressionProvider.CreateModelExpression[TModel,TValue](ViewDataDictionary`1 viewData, Expression`1 expression)
+   at AspNetCoreGeneratedDocument.Views_Home_Index.<ExecuteAsync>b__31_0()
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext.GetChildContentAsync(Boolean useCachedResult, HtmlEncoder encoder)
+   at Microsoft.AspNetCore.Mvc.TagHelpers.RenderAtEndOfFormTagHelper.ProcessAsync(TagHelperContext context, TagHelperOutput output)
+   at Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperRunner.<RunAsync>g__Awaited|0_0(Task task, TagHelperExecutionContext executionContext, Int32 i, Int32 count)
+   at AspNetCoreGeneratedDocument.Views_Home_Index.ExecuteAsync()
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageCoreAsync(IRazorPage page, ViewContext context)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderPageAsync(IRazorPage page, ViewContext context, Boolean invokeViewStarts)
+   at Microsoft.AspNetCore.Mvc.Razor.RazorView.RenderAsync(ViewContext context)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ViewContext viewContext, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewExecutor.ExecuteAsync(ActionContext actionContext, IView view, ViewDataDictionary viewData, ITempDataDictionary tempData, String contentType, Nullable`1 statusCode)
+   at Microsoft.AspNetCore.Mvc.ViewFeatures.ViewResultExecutor.ExecuteAsync(ActionContext context, ViewResult result)
+   at Microsoft.AspNetCore.Mvc.ViewResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-06-10 09:10:35.455 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-10 09:10:35.691 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-10 09:36:35.957 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-10 09:43:24.245 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-10 09:43:24.616 +05:30 [INF] User logged out successfully.
+2025-06-10 09:43:24.650 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-10 09:44:18.564 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-10 09:44:52.321 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-10 09:45:03.200 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-10 09:54:14.209 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-10 10:07:16.773 +05:30 [INF] User logged out successfully.
+2025-06-10 10:07:16.784 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-10 10:15:57.970 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-10 10:18:30.382 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-10 10:18:59.460 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-10 10:47:42.954 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-10 11:05:43.429 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-10 11:06:42.880 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-10 11:34:03.382 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-10 11:35:28.008 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-10 11:42:07.124 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-10 11:44:21.981 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-10 11:45:02.842 +05:30 [INF] User logged out successfully.
+2025-06-10 11:45:02.858 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-10 11:49:35.280 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-10 11:50:34.796 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-10 13:54:46.580 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-10 14:14:39.241 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-10 14:18:41.391 +05:30 [INF] User logged out successfully.
+2025-06-10 14:18:41.399 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-10 15:00:50.258 +05:30 [INF] User logged out successfully.
+2025-06-10 15:00:50.291 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-10 15:02:03.866 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-10 15:56:42.537 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-10 17:25:33.855 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-10 17:26:16.937 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-10 17:27:37.700 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-10 17:28:27.212 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-10 17:28:28.239 +05:30 [WRN] Unable to configure browser refresh script injection on the response. Consider manually adding '<script src="/_framework/aspnetcore-browser-refresh.js"></script>' to the body of the page.
+2025-06-10 17:28:37.122 +05:30 [WRN] Unable to configure browser refresh script injection on the response. Consider manually adding '<script src="/_framework/aspnetcore-browser-refresh.js"></script>' to the body of the page.
+2025-06-10 17:28:46.258 +05:30 [WRN] Unable to configure browser refresh script injection on the response. Consider manually adding '<script src="/_framework/aspnetcore-browser-refresh.js"></script>' to the body of the page.
+2025-06-10 17:28:57.874 +05:30 [WRN] Unable to configure browser refresh script injection on the response. Consider manually adding '<script src="/_framework/aspnetcore-browser-refresh.js"></script>' to the body of the page.
+2025-06-10 17:29:35.321 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-10 17:29:38.205 +05:30 [WRN] Unable to configure browser refresh script injection on the response. Consider manually adding '<script src="/_framework/aspnetcore-browser-refresh.js"></script>' to the body of the page.
+2025-06-10 17:34:06.459 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-10 17:35:57.769 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-10 17:36:39.351 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-10 17:56:10.781 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-10 17:57:10.012 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-10 18:15:45.495 +05:30 [INF] User logged out successfully.
+2025-06-10 18:15:45.503 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-10 18:19:37.977 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-10 18:25:39.671 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-10 18:33:29.272 +05:30 [WRN] Failed to determine the https port for redirect.

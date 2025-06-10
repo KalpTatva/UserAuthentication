@@ -75,7 +75,10 @@ public class DashboardController : Controller
                     PhoneNumber = user.PhoneNumber,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
-                    DateOfBirth = user.DateOfBirth
+                    DateOfBirth = user.DateOfBirth,
+                    Age = user.Age,
+                    Address = user.Address,
+                    Pincode = user.Pincode ?? 0
                 };
                 return PartialView("_EditUserPartial", editUserViewModel);
             }
@@ -96,10 +99,11 @@ public class DashboardController : Controller
     public IActionResult EditUser(User user)
     {
         try
-        {
+        {   
+            string? email = User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value;
             if (user != null)
             {
-                ResponsesViewModel response = _userService.UpdateUser(user);
+                ResponsesViewModel response = _userService.UpdateUser(user, email);
                 if (response.IsSuccess)
                 {
                     return Json(new { success = true, message = "User updated successfully." });
@@ -127,7 +131,8 @@ public class DashboardController : Controller
     {
         try
         {
-            ResponsesViewModel response = _userService.DeleteUser(userId);
+            string? email = User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value;
+            ResponsesViewModel response = _userService.DeleteUser(userId, email);
             if (response.IsSuccess)
             {
                 return Json(new { success = true, message = "User deleted successfully." });
@@ -143,6 +148,12 @@ public class DashboardController : Controller
             return Json(new { success = false, message = ex.Message });
         }
     }
+
+
+    public IActionResult UserDetails()
+    {
+        return View();
+    }
     #endregion
     #region User
 
@@ -157,8 +168,28 @@ public class DashboardController : Controller
 
     #endregion
 
+    public IActionResult Logs()
+    {
+        return View();
+    }
+
+    [HttpGet]
+    public IActionResult LogsDetails()
+    {
+        try
+        {
+            List<UsersHistory> usersHistories = _userService.LogUserHistory();
+            if(usersHistories != null && usersHistories.Any())
+            {
+                return PartialView("_LogsPartial" , usersHistories);
+            }
+            else 
+            {
+                return Json(new { success = false, message = "Error occured while fetching log information " });
+            }
+        }catch(Exception ex){
+            return Json(new { success = false, message = ex.Message });
+        }
+    }
 }
 
-internal class httpPostAttribute : Attribute
-{
-}

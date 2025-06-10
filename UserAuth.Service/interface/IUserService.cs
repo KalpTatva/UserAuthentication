@@ -20,9 +20,12 @@ public interface IUserService
     User GetUserById(int userId);
     
     // soft delete user
-    ResponsesViewModel DeleteUser(int userId);
+    ResponsesViewModel DeleteUser(int userId, string email);
 
     // method for updating user details
-    ResponsesViewModel UpdateUser(User user);
+    ResponsesViewModel UpdateUser(User user, string email);
+
+    // users log history
+    List<UsersHistory> LogUserHistory();
 
 }

@@ -2,9 +2,18 @@
     Layout = "~/Views/Shared/_Dashboard.cshtml";
 }
 
+
 <div class="d-flex w-100 justify-content-between container mt-4">
-    <h2>Dashboard</h2>
-    <a asp-action="UserDetails" asp-controller="Dashboard" class="btn btn-primary m-2">User Details</a>
+    <h2>User Detials</h2>
+    <div class="d-flex gap-2">
+        <a asp-controller="Dashboard" asp-action="UserDetails" class="btn btn-secondary mt-2">Back To Users</a>
+    </div>
+</div>
+
+<div id="logContent">
+</div>
+<div class="loader-class d-flex justify-content-center align-items-center">
+    <span class="loader"></span>
 </div>
 
 
@@ -15,4 +24,6 @@
         window.errorMessage = '@TempData["ErrorMessage"]';
     </script>
     <script src="~/js/toastr_script.js"></script>
+    <script src="~/js/log_Script.js"></script>
+
 }

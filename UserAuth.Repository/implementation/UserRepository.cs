@@ -113,10 +113,23 @@ public class UserRepository: IUserRepository
         }
     }
 
+    // DB call for user log history
+    public List<UsersHistory> GetUserHistroryLog()
+    {
+        try{
+            List<UsersHistory> usersHistories = _context.UsersHistories.ToList();
+            return usersHistories;
+        }catch(Exception ex){
+            throw new Exception(ex.Message);
+        }
+    }
+
+
+
     // DB call for Registering a new user using stored procedure
     public async Task<bool> RegisterUser(RegisterUserViewModel model)
     {
-        string query = "CALL SP_RegisterUser(@in_UserName::varchar, @in_Email::varchar, @in_PhoneNumber::varchar, @in_FirstName::varchar, @in_LastName::varchar, @in_Password::varchar, @in_Role::integer, @in_DateOfBirth::timestamp)";
+        string query = "CALL SP_RegisterUser(@in_UserName::varchar, @in_Email::varchar, @in_PhoneNumber::varchar, @in_FirstName::varchar, @in_LastName::varchar, @in_Password::varchar, @in_Role::integer, @in_DateOfBirth::timestamp, @in_Address::varchar, @in_Pincode::integer)";
         var parameters = new DynamicParameters();
         parameters.Add("in_UserName", model.UserName, DbType.String, ParameterDirection.Input);
         parameters.Add("in_Email", model.Email, DbType.String, ParameterDirection.Input);
@@ -126,6 +139,9 @@ public class UserRepository: IUserRepository
         parameters.Add("in_Password", model.Password, DbType.String, ParameterDirection.Input);
         parameters.Add("in_Role", model.Role, DbType.Int32, ParameterDirection.Input);
         parameters.Add("in_DateOfBirth", model.DateOfBirth, DbType.Date, ParameterDirection.Input);
+        parameters.Add("in_Address", model.Address, DbType.String, ParameterDirection.Input);
+        parameters.Add("in_Pincode", model.Pincode, DbType.Int32, ParameterDirection.Input);
+
         
         try
         {
@@ -141,11 +157,12 @@ public class UserRepository: IUserRepository
     }
 
     // DB call for soft delete user using stored procedure (soft delete)
-    public bool DeleteUser(int userId)
+    public bool DeleteUser(int userId, int deletedByUserId)
     {
-        string query = "CALL SP_DeleteUser(@in_UserId::integer)";
+        string query = "CALL sp_deleteuser(@in_UserId::integer,@in_deletedByUserId::integer)";
         var parameters = new DynamicParameters();
         parameters.Add("in_UserId", userId, DbType.Int32, ParameterDirection.Input);
+        parameters.Add("in_deletedByUserId", deletedByUserId, DbType.Int32, ParameterDirection.Input);
         try
         {
             int result = _dbConnection.Execute(query, parameters);
@@ -161,9 +178,9 @@ public class UserRepository: IUserRepository
     }
 
     // DB call for updating user details using stored procedure
-    public bool UpdateUserSP(User user)
+    public bool UpdateUserSP(User user,int EditedByuserid)
     {
-        string query = "CALL SP_UpdateUser(@in_UserName::varchar, @in_Email::varchar, @in_PhoneNumber::varchar, @in_FirstName::varchar, @in_LastName::varchar, @in_DateOfBirth::timestamp)";
+        string query = "CALL SP_UpdateUser(@in_UserName::varchar, @in_Email::varchar, @in_PhoneNumber::varchar, @in_FirstName::varchar, @in_LastName::varchar, @in_DateOfBirth::timestamp, @in_Address::varchar, @in_EditedByuserid::integer, @in_Pincode::integer)";
         var parameters = new DynamicParameters();
         parameters.Add("in_UserName", user.UserName, DbType.String, ParameterDirection.Input);
         parameters.Add("in_Email", user.Email, DbType.String, ParameterDirection.Input);
@@ -171,6 +188,9 @@ public class UserRepository: IUserRepository
         parameters.Add("in_FirstName", user.FirstName, DbType.String, ParameterDirection.Input);
         parameters.Add("in_LastName", user.LastName, DbType.String, ParameterDirection.Input);
         parameters.Add("in_DateOfBirth", user.DateOfBirth, DbType.Date, ParameterDirection.Input);
+        parameters.Add("in_Address", user.Address, DbType.String, ParameterDirection.Input);
+        parameters.Add("in_EditedByuserid", EditedByuserid, DbType.Int32, ParameterDirection.Input);
+        parameters.Add("in_Pincode", user.Pincode, DbType.Int32, ParameterDirection.Input);
 
         try
         {

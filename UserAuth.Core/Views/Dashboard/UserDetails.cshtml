@@ -1,0 +1,33 @@
+@{
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+
+
+<div class="d-flex w-100 justify-content-between container mt-4">
+    <h2>User Detials</h2>
+    <div class="d-flex gap-2">
+        <a asp-controller="Dashboard" asp-action="Logs" class="btn btn-primary mt-2">Logs</a>
+        <a asp-controller="Dashboard" asp-action="Index" class="btn btn-secondary mt-2">Back To Dashboard</a>
+    </div>
+</div>
+
+<div id="UserContent">
+</div>
+<div class="loader-class d-flex justify-content-center align-items-center">
+    <span class="loader"></span>
+</div>
+
+<partial name="_EditUserModalPartial" />
+<partial name="_DeleteUserModalPartial" />
+
+@section scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        window.successMessage = '@TempData["SuccessMessage"]';
+        window.errorMessage = '@TempData["ErrorMessage"]';
+    </script>
+    <script src="~/js/toastr_script.js"></script>
+    <script src="~/js/dashBoard_script.js"> </script>
+}

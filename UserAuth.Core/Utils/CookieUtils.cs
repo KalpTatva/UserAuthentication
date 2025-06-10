@@ -9,7 +9,7 @@ public class CookieUtils
         var cookieOptions = new CookieOptions
         {
             HttpOnly = true,
-            Expires = isPersistent ? DateTimeOffset.UtcNow.AddDays(30) : DateTimeOffset.UtcNow.AddMinutes(60), 
+            Expires = isPersistent ? DateTimeOffset.UtcNow.AddDays(30) : DateTimeOffset.UtcNow.AddDays(1), 
         };
         response.Cookies.Append("auth_token", token, cookieOptions);
     }

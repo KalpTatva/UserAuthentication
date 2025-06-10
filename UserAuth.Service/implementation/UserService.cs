@@ -33,11 +33,11 @@ public class UserService : IUserService
     }
 
     // Method to handle user login
-    public async Task<ResponseTokenViewModel> UserLogin(LoginViewModel model)
+    public async Task<ResponseTokenViewModel?> UserLogin(LoginViewModel model)
     {
         try
         {
-            User? user = _userRepository.GetUserByEmail(model.Email.Trim());
+            User? user = _userRepository.GetUserByEmail(model.Email.Trim().ToLower());
     
             if(user!=null && BCrypt.Net.BCrypt.EnhancedVerify(model.Password, user.Password))
             {
@@ -45,7 +45,7 @@ public class UserService : IUserService
                 
                 DateTime expiryTime = model.RememberMe 
                     ? DateTime.Now.AddDays(30) 
-                    : DateTime.Now.AddMinutes(60);
+                    : DateTime.Now.AddDays(1);
 
                 string token = GenerateJwtToken(model.Email, expiryTime, RoleName);
                 if (token != null)
@@ -110,7 +110,7 @@ public class UserService : IUserService
     {
         try
         {
-            User? user = _userRepository.GetUserByEmail(email.ToEmail.Trim());
+            User? user = _userRepository.GetUserByEmail(email.ToEmail.Trim().ToLower());
             if (user == null)
             {
                 return new ResponsesViewModel()
@@ -266,7 +266,7 @@ public class UserService : IUserService
             }
 
             // get user by email
-            User? user = _userRepository.GetUserByEmail(model.Email.Trim());
+            User? user = _userRepository.GetUserByEmail(model.Email.Trim().ToLower());
             if (user == null)
             {
                 return new ResponsesViewModel()
@@ -345,7 +345,7 @@ public class UserService : IUserService
             }
 
             // check if user already exists
-            User? existingUser = _userRepository.GetUserByEmail(model.Email.Trim());
+            User? existingUser = _userRepository.GetUserByEmail(model.Email.Trim().ToLower());
             if (existingUser != null)
             {
                 return new ResponsesViewModel()
@@ -367,6 +367,7 @@ public class UserService : IUserService
 
             // create new user
             model.Password = BCrypt.Net.BCrypt.EnhancedHashPassword(model.Password);
+            model.Email = model.Email.Trim().ToLower();
             bool response = await _userRepository.RegisterUser(model);
            
             if (!response)
@@ -413,7 +414,7 @@ public class UserService : IUserService
     }
 
     // delete user (soft delete)
-    public ResponsesViewModel DeleteUser(int userId)
+    public ResponsesViewModel DeleteUser(int userId, string email)
     {
         try
         {
@@ -437,7 +438,8 @@ public class UserService : IUserService
             }
 
             // soft delete user using sp
-            bool res = _userRepository.DeleteUser(userId);
+            User? user1 = _userRepository.GetUserByEmail(email.Trim().ToLower());
+            bool res = _userRepository.DeleteUser(userId, user1.UserId);
             if (!res)
             {
                 return new ResponsesViewModel()
@@ -464,7 +466,7 @@ public class UserService : IUserService
     }
 
     // Method to update user details
-    public ResponsesViewModel UpdateUser(User user)
+    public ResponsesViewModel UpdateUser(User user, string email)
     {
         try
         {
@@ -479,7 +481,7 @@ public class UserService : IUserService
             }
 
             // check if user exists
-            User? existingUser = _userRepository.GetUserByEmail(user.Email.Trim());
+            User? existingUser = _userRepository.GetUserByEmail(user.Email.Trim().ToLower());
             if (existingUser == null)
             {
                 return new ResponsesViewModel()
@@ -500,7 +502,8 @@ public class UserService : IUserService
             }
 
             // update user stored procedure
-            bool res = _userRepository.UpdateUserSP(user);
+            User? user1 = _userRepository.GetUserByEmail(email.Trim().ToLower());
+            bool res = _userRepository.UpdateUserSP(user, user1.UserId);
             if (!res)
             {
                 return new ResponsesViewModel()
@@ -523,6 +526,21 @@ public class UserService : IUserService
                 IsSuccess = false,
                 Message = $"Error 500 : Internal Server Error {ex.Message}"
             };
+        }
+    }
+
+
+
+    public List<UsersHistory> LogUserHistory()
+    {
+        try{
+
+            List<UsersHistory> usersHistories = _userRepository.GetUserHistroryLog();
+            return usersHistories;
+
+        }catch(Exception ex)
+        {
+            throw new Exception(ex.Message);
         }
     }
 }

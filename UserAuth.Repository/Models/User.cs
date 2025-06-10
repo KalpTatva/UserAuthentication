@@ -32,4 +32,12 @@ public partial class User
     public DateTime? DeletedAt { get; set; }
 
     public bool IsDeleted { get; set; }
+
+    public string? Address { get; set; }
+
+    public int? EditedById { get; set; }
+
+    public int? DeletedById { get; set; }
+
+    public int? Pincode { get; set; }
 }

@@ -13,6 +13,7 @@ public interface IUserRepository
     void UpdateUser(User user);
     void UpdatePasswordResetRequest(PasswordResetRequest passwordResetRequest);
     Task<bool> RegisterUser(RegisterUserViewModel model);
-    bool DeleteUser(int userId);
-    bool UpdateUserSP(User user);
+    bool DeleteUser(int userId,int DeleteUser);
+    bool UpdateUserSP(User user,int userid);
+    List<UsersHistory> GetUserHistroryLog();
 }

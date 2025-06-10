@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using UserAuth.Repository.CustomValidation;
 
 namespace UserAuth.Repository.ViewModels;
 
@@ -32,5 +33,11 @@ public class EditUserViewModel
 
     [Required(ErrorMessage = "Password is required")]
     public DateTime DateOfBirth { get; set; }
-    
+
+    public int Age {get;set;}  
+    public string? Address {get;set;}  
+
+    [Required(ErrorMessage = "zipcode is required")]
+    [RegularExpression(@"^\d{6}$", ErrorMessage = "Invalid Zipcode, should be 6 numbers")]
+    public int Pincode {get;set;}
 }

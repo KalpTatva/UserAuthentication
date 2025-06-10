@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using UserAuth.Repository.CustomValidation;
 
 namespace UserAuth.Repository.ViewModels;
 
@@ -52,5 +53,12 @@ public class RegisterUserViewModel
 
     [Required(ErrorMessage = "Date of birth is required")]
     [DataType(DataType.Date)]
+    [MinimumAge(18, ErrorMessage = "You must be at least 18 years old to register.")]
     public DateTime DateOfBirth { get; set; } 
+
+    public string? Address {get;set;}
+
+    [Required(ErrorMessage = "zipcode is required")]
+    [RegularExpression(@"^\d{6}$", ErrorMessage = "Invalid Zipcode, should be 6 numbers")]
+    public int Pincode {get;set;}
 }

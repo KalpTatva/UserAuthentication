@@ -3,43 +3,72 @@
 <form action="POST" id="EditUserForm">
     <div class="w-100">
 
-        <div class="has-validation my-2 mb-4 w-100">
-            <input type="text" class="form-control" placeholder="Email" asp-for="Email" readonly>
+        <div class="form-floating has-validation my-2 mb-4 w-100">
+            <input type="text" class="form-control" placeholder="Email" id="Email" asp-for="Email" readonly>
+            <label for="Email">Email</label>
+
             <span asp-validation-for="Email" class="text-danger float-start"></span>
         </div>
 
-        <div class="has-validation my-2 mb-4 w-100">
-            <input type="text" class="form-control" placeholder="Username" asp-for="UserName">
+        <div class="form-floating has-validation my-2 mb-4 w-100">
+            <input type="text" class="form-control" placeholder="Username" id="UserName" asp-for="UserName">
+            <label for="UserName">Username</label>
+
             <span asp-validation-for="UserName" class="text-danger float-start"></span>
         </div>
 
 
-        <div class="has-validation my-2 mb-4 w-100">
-            <input type="text" class="form-control" placeholder="First Name" asp-for="FirstName">
+        <div class="form-floating has-validation my-2 mb-4 w-100">
+            <input type="text" class="form-control" placeholder="First Name" id="" asp-for="FirstName">
+            <label for="FirstName">First name</label>
+
             <span asp-validation-for="FirstName" class="text-danger float-start"></span>
         </div>
-        <div class="has-validation my-2 mb-4 w-100">
-            <input type="text" class="form-control" placeholder="Last Name" asp-for="LastName">
+        <div class="form-floating has-validation my-2 mb-4 w-100">
+            <input type="text" class="form-control" placeholder="Last Name" id="LastName" asp-for="LastName">
+            <label for="LastName">Last name</label>
+
             <span asp-validation-for="LastName" class="text-danger float-start"></span>
         </div>
 
         <div class="d-flex gap-4">
-            <div class="has-validation my-2 mb-4 w-100">
-                <input type="date" class="form-control" max="@DateTime.Now.ToString("yyyy-MM-ddThh:mm")" placeholder="Date of Birth" asp-for="DateOfBirth">
-                <span asp-validation-for="DateOfBirth" class="text-danger float-start"></span>
+            <div class="form-floating has-validation my-2 mb-4 w-100">
+                <input type="date" id="DateOfBirth" class="form-control DateOfBirthEdit" placeholder="Date of Birth"
+                    asp-for="DateOfBirth">
+                <label for="DateOfBirth">Date Of birth</label>
+
+                <span asp-validation-for="DateOfBirth" class="text-danger float-start DOBValidationSpan2"></span>
             </div>
 
+            <div class="form-floating has-validation my-2 mb-4 w-100">
+                <input type="text" class="form-control AgeCalculation2" asp-for="Age" id="AgeCalculation" readonly />
+                <label for="AgeCalculation">Age</label>
+            </div>
+        </div>
+        <div class="d-flex gap-4">
+            <div class="form-floating has-validation my-2 mb-4 w-100">
+                <input type="text" id="PhoneNumber" class="form-control" asp-for="PhoneNumber">
+                <label for="PhoneNumber">Phone </label>
 
-            <div class="has-validation my-2 mb-4 w-100">
-                <input type="text" class="form-control" placeholder="Phone Number" asp-for="PhoneNumber">
                 <span asp-validation-for="PhoneNumber" class="text-danger float-start"></span>
+            </div>
+            <div class="form-floating has-validation my-2 mb-4 w-100">
+                <input type="text" id="Pincode" class="form-control" asp-for="Pincode">
+                <label for="Pincode">pincode </label>
+
+                <span asp-validation-for="Pincode" class="text-danger float-start"></span>
             </div>
         </div>
 
+        <div class="form-floating has-validation my-2 mb-4 w-100">
+            <input type="text" class="form-control" placeholder="Address" id="Address" asp-for="Address">
+            <label for="Address">Address</label>
+            <span asp-validation-for="Address" class="text-danger float-start"></span>
+        </div>
 
         <div class="text-danger">@TempData["ErrorMessage"]</div>
         <div class="">
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary EditUserBtn">Save</button>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
         </div>
     </div>
@@ -47,3 +76,8 @@
 
 
 <partial name="_ValidationScriptsPartial" />
+
+
+
+
+@* i did added validation script _ValidationScriptsPartial and on doing inspect, it does shows me the validations but it is not working on hitting save it shows now validation spans *@

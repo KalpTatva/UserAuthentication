@@ -1,70 +1,108 @@
+@using static UserAuth.Repository.helpers.Enums
 @model UserAuth.Repository.ViewModels.RegisterUserViewModel
 <div class="LoginContent">
-    <h1 class="display-4 mb-4">Register New USer</h1>
+    <h1 class="display-4 mb-4">Register User</h1>
     <div class="w-100">
         <form asp-action="RegisterUser" asp-controller="Home" method="post" class="d-flex flex-column">
 
-            <div class=" has-validation my-2 mb-4 w-100">
-                <input type="text" class="form-control" placeholder="Email" asp-for="Email">
+            <div class="form-floating has-validation my-2 mb-3 w-100">
+                <input type="text" class="form-control" placeholder="Email" id="EmailInput" asp-for="Email">
+                <label for="EmailInput">Email</label>
                 <span asp-validation-for="Email" class="text-danger float-start"></span>
             </div>
 
 
-            <div class=" has-validation my-2 mb-4 w-100">
-                <input type="text" class="form-control" placeholder="Username" asp-for="UserName">
+            <div class="form-floating has-validation my-2 mb-3 w-100">
+                <input type="text" class="form-control" placeholder="Username" id="UserName" asp-for="UserName">
+                <label for="UserName">Username</label>
                 <span asp-validation-for="UserName" class="text-danger float-start"></span>
             </div>
-            <div class="d-flex gap-4">
-                <div class=" has-validation my-2 mb-4 w-100">
-                    <input type="text" class="form-control" placeholder="First Name" asp-for="FirstName">
+            <div class="d-flex gap-2">
+                <div class="form-floating has-validation my-2 mb-4 w-100">
+                    <input type="text" class="form-control" placeholder="First Name" id="FirstName" asp-for="FirstName">
+                    <label for="FirstName">First name</label>
+
                     <span asp-validation-for="FirstName" class="text-danger float-start"></span>
                 </div>
-                <div class=" has-validation my-2 mb-4 w-100">
-                    <input type="text" class="form-control" placeholder="Last Name" asp-for="LastName">
+                <div class="form-floating has-validation my-2 mb-4 w-100">
+                    <input type="text" class="form-control" placeholder="Last Name" id="" asp-for="LastName">
+                    <label for="LastName">Last name</label>
+
                     <span asp-validation-for="LastName" class="text-danger float-start"></span>
                 </div>
             </div>
 
+            <div class="form-floating has-validation my-2 mb-4 w-100">
+                <input type="text" class="form-control" placeholder="Address" id="Address" asp-for="Address">
+                <label for="Address">Address</label>
+                <span asp-validation-for="Address" class="text-danger float-start"></span>
+            </div>
+            <div class="d-flex gap-2">
+                <div class="form-floating has-validation my-2 mb-4 w-100">
+                    <input type="text" class="form-control" placeholder="Phone Number" id="PhoneNumber"
+                        asp-for="PhoneNumber">
+                    <label for="PhoneNumber">Phone number</label>
 
-            <div class=" has-validation my-2 mb-4 w-100">
-                <input type="text" class="form-control" placeholder="Phone Number" asp-for="PhoneNumber">
-                <span asp-validation-for="PhoneNumber" class="text-danger float-start"></span>
+                    <span asp-validation-for="PhoneNumber" class="text-danger float-start"></span>
+                </div>
+
+                <div class="form-floating has-validation my-2 mb-4 w-100">
+                    <input type="text" id="Pincode" class="form-control" placeholder="pincode" asp-for="Pincode">
+                    <label for="Pincode">pincode </label>
+
+                    <span asp-validation-for="Pincode" class="text-danger float-start"></span>
+                </div>
             </div>
 
 
-            <div class="d-flex gap-4">
-                <div class=" has-validation my-2 mb-4 w-100">
-                    <input type="Date" class="form-control" placeholder="Date of birth" asp-for="DateOfBirth">
-                    <span asp-validation-for="DateOfBirth" class="text-danger float-start"></span>
+            <div class="d-flex gap-2">
+                <div class="form-floating has-validation my-2 mb-4 w-100">
+                    <input type="Date" class="form-control" placeholder="Date of birth" id="DateOfBirth"
+                        asp-for="DateOfBirth">
+                    <label for="DateOfBirth">Date Of birth</label>
+
+                    <span asp-validation-for="DateOfBirth" class="text-danger float-start"
+                        id="DOBValidationSpan"></span>
                 </div>
-                <div class="has-validation my-2 mb-4 w-100">
-                    <select asp-for="Role" class="form-control">
-                        <option value="">Select Role</option>
-                        <option value="2">User</option>
-                        <option value="1">Admin</option>
+
+                <div class="form-floating has-validation my-2 mb-4 w-100">
+                    <select asp-for="Role" class="form-control" asp-items="Html.GetEnumSelectList<UserRole>()"
+                        id="Role">
                     </select>
+                    <label for="Role">Role</label>
+
                     <span asp-validation-for="Role" class="text-danger float-start"></span>
                 </div>
             </div>
 
 
-            <div class="d-flex gap-4">
-                <div class="position-relative password-section my-2 mb-4">
-                    <input asp-for="Password" type="password" class="form-control" id="exampleInputPassword2"
-                        placeholder="New Password*">
-                    <div class="eye z-10">
-                        <i class="bi bi-eye openeye1 eye inactive"></i>
-                        <i class="bi bi-eye-slash closeeye1 eye active"></i>
+
+            <div class="d-flex gap-2">
+
+                <div class="my-2 mb-4">
+                    <div class="form-floating position-relative password-section ">
+                        <input asp-for="Password" type="password" class="form-control" id="exampleInputPassword2"
+                            placeholder="New Password*">
+                        <div class="eye z-10">
+                            <i class="bi bi-eye openeye1 eye inactive"></i>
+                            <i class="bi bi-eye-slash closeeye1 eye active"></i>
+                        </div>
+                        <label for="exampleInputPassword2">Password</label>
+
                     </div>
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
 
-                <div class="position-relative password-section my-2 mb-4">
-                    <input asp-for="ConfirmPassword" type="password" class="form-control" id="exampleInputPassword3"
-                        placeholder="Confirm New Password*">
-                    <div class="eye z-10">
-                        <i class="bi bi-eye openeye2 eye inactive"></i>
-                        <i class="bi bi-eye-slash closeeye2 eye active"></i>
+                <div class="my-2 mb-4">
+                    <div class="form-floating position-relative password-section  ">
+                        <input asp-for="ConfirmPassword" type="password" class="form-control" id="exampleInputPassword3"
+                            placeholder="Confirm New Password*">
+                        <div class="eye z-10">
+                            <i class="bi bi-eye openeye2 eye inactive"></i>
+                            <i class="bi bi-eye-slash closeeye2 eye active"></i>
+                        </div>
+                        <label for="exampleInputPassword3">Confirm Password</label>
+
                     </div>
                     <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                 </div>
@@ -77,7 +115,10 @@
         </form>
     </div>
 
-    <a class="" asp-action="RegisterUser" asp-controller="Home"></a>
+
+    <div class="d-flex justify-content-center mt-3">
+        <a class="text-decoration-none" asp-action="Index" asp-controller="Home">Back to login</a>
+    </div>
 </div>
 
 
@@ -86,6 +127,9 @@
     <script>
         window.successMessage = '@TempData["SuccessMessage"]';
         window.errorMessage = '@TempData["ErrorMessage"]';
+
+
     </script>
     <script src="~/js/toastr_script.js"></script>
+
 }

@@ -1,0 +1,35 @@
+
+@using static UserAuth.Repository.helpers.Enums
+
+@model List<UserAuth.Repository.Models.UsersHistory>
+<div class="container overflow-auto">
+    <div class="row">
+        <div class="">
+            <table class="table table-striped text-nowrap">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>History</th>
+                        <th>Operation</th>
+                        <th>Performed By</th>
+                        <th>Created At</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>@user.HistoryId</td>
+                            <td>@user.History</td>
+                            <td>@(((OperationEnum)user.Operation).ToString())</td>
+                            <td>@user.UserId</td>
+                            <td>@user.CreatedAt</td>
+                            
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

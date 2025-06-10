@@ -19,6 +19,8 @@ public partial class UserAuthContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
+    public virtual DbSet<UsersHistory> UsersHistories { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseNpgsql("Host=localhost;Database=UserAuth;Username=postgres;password=tatva123");
@@ -51,6 +53,9 @@ public partial class UserAuthContext : DbContext
             entity.ToTable("users");
 
             entity.Property(e => e.UserId).HasColumnName("user_id");
+            entity.Property(e => e.Address)
+                .HasMaxLength(500)
+                .HasColumnName("address");
             entity.Property(e => e.Age).HasDefaultValue(0);
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("now()")
@@ -62,10 +67,16 @@ public partial class UserAuthContext : DbContext
             entity.Property(e => e.DeletedAt)
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("deletedAt");
+            entity.Property(e => e.DeletedById)
+                .HasDefaultValue(0)
+                .HasColumnName("deleted_by_id");
             entity.Property(e => e.EditedAt)
                 .HasDefaultValueSql("now()")
                 .HasColumnType("timestamp without time zone")
                 .HasColumnName("editedAt");
+            entity.Property(e => e.EditedById)
+                .HasDefaultValue(0)
+                .HasColumnName("edited_by_id");
             entity.Property(e => e.Email)
                 .HasMaxLength(255)
                 .HasColumnName("email");
@@ -84,10 +95,29 @@ public partial class UserAuthContext : DbContext
             entity.Property(e => e.PhoneNumber)
                 .HasMaxLength(255)
                 .HasColumnName("phone_number");
+            entity.Property(e => e.Pincode).HasColumnName("pincode");
             entity.Property(e => e.Role).HasDefaultValue(0);
             entity.Property(e => e.UserName)
                 .HasMaxLength(255)
                 .HasColumnName("user_name");
+        });
+
+        modelBuilder.Entity<UsersHistory>(entity =>
+        {
+            entity.HasKey(e => e.HistoryId).HasName("users_history_pkey");
+
+            entity.ToTable("users_history");
+
+            entity.Property(e => e.HistoryId).HasColumnName("history_id");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("now()")
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("created_at");
+            entity.Property(e => e.History)
+                .HasMaxLength(500)
+                .HasColumnName("history");
+            entity.Property(e => e.Operation).HasColumnName("operation");
+            entity.Property(e => e.UserId).HasColumnName("user_id");
         });
 
         OnModelCreatingPartial(modelBuilder);
