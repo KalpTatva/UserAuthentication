@@ -86,6 +86,30 @@ public class UserRepository: IUserRepository
         }
     }
     
+    // DB call for add user2faAuth
+    public void AddUser2faAuth(User2faAuth user2FaAuth)
+    {
+        try{
+            _context.User2faAuths.Add(user2FaAuth);
+            _context.SaveChanges();
+        }catch(Exception ex)
+        {
+            throw new Exception("An error occurred while adding User2faAuth.", ex);   
+        }
+    }
+
+    // DB call for update user2faAuth
+    public void UpdateUser2faAuth(User2faAuth user2FaAuth)
+    {
+        try{
+            _context.User2faAuths.Update(user2FaAuth);
+            _context.SaveChanges();
+        }catch(Exception ex)
+        {
+            throw new Exception("An error occurred while adding User2faAuth.", ex);   
+        }
+    }
+
     // DB call for update password reset token
     public void UpdatePasswordResetRequest(PasswordResetRequest passwordResetRequest)
     {

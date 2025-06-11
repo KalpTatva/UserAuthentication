@@ -11,6 +11,8 @@ public interface IUserRepository
     Task AddPasswordResetRequest(PasswordResetRequest passwordResetRequest);
     PasswordResetRequest? GetPasswordResetRequestByToken(string token);
     void UpdateUser(User user);
+    public void AddUser2faAuth(User2faAuth user2FaAuth);
+    public void UpdateUser2faAuth(User2faAuth user2FaAuth);
     void UpdatePasswordResetRequest(PasswordResetRequest passwordResetRequest);
     Task<bool> RegisterUser(RegisterUserViewModel model);
     bool DeleteUser(int userId,int DeleteUser);

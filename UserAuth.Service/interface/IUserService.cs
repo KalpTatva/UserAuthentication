@@ -5,7 +5,7 @@ namespace UserAuth.Service.interfaces;
 
 public interface IUserService 
 {
-    Task<ResponseTokenViewModel> UserLogin(LoginViewModel model);
+    Task<ResponsesViewModel> UserLogin(LoginViewModel model);
     Task<List<User>?> GetAllUserDetails();
     Task<ResponsesViewModel> ForgetPassword(EmailViewModel email);
     ResponsesViewModel ValidateResetPasswordToken(string token);

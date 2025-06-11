@@ -61,28 +61,15 @@ public class HomeController : Controller
                 TempData["ErrorMessage"] = "Invalid user credentials";
                 return View(model);
             }
-            ResponseTokenViewModel? response = await _userService.UserLogin(model);
-            if (response != null && response?.token?.Length > 0)
+            ResponsesViewModel? response = await _userService.UserLogin(model);
+            if(response.IsSuccess)
             {
-                // setting jwt cookie 
-                CookieUtils.SetJwtCookie(Response, response.token, response.isPersistent);
-                
-                TempData["SuccessMessage"] = "User logged in successfully!";
-                if(response.Role == UserRole.Admin.ToString())
-                {
-                    return RedirectToAction("Index", "Dashboard");
-                }
-                else if(response.Role == UserRole.User.ToString())
-                {
-                    return RedirectToAction("IndexOfUser", "Dashboard");
-                }else {
-                    TempData["ErrorMessage"] = "Invalid user role. Please contact support.";
-                    return View(model);
-                }
+                TempData["SuccessMessage"] = response.Message;
+                return RedirectToAction("User2FaAuth", new {Email = model.Email});
             }
-            res = response != null ? response.response ?? "" : "";
-            TempData["ErrorMessage"] = res;
-            return View(model); 
+
+            TempData["ErrorMessage"] = response.Message;
+            return View(model);
         }
         catch(Exception ex)
         {

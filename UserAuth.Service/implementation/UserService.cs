@@ -33,7 +33,7 @@ public class UserService : IUserService
     }
 
     // Method to handle user login
-    public async Task<ResponseTokenViewModel?> UserLogin(LoginViewModel model)
+    public async Task<ResponsesViewModel?> UserLogin(LoginViewModel model)
     {
         try
         {
@@ -41,40 +41,67 @@ public class UserService : IUserService
     
             if(user!=null && BCrypt.Net.BCrypt.EnhancedVerify(model.Password, user.Password))
             {
-                string? RoleName = user.Role != 0 ? ((UserRole)user.Role).ToString():null;
                 
-                DateTime expiryTime = model.RememberMe 
-                    ? DateTime.Now.AddDays(30) 
-                    : DateTime.Now.AddDays(1);
+                // adding otp to the db with expire within 5 minutes
 
-                string token = GenerateJwtToken(model.Email, expiryTime, RoleName);
-                if (token != null)
+                Random rondom = new Random();
+                string randomOTP = rondom.Next(100001,100000).ToString(); // generates random opt
+                string varificationCode = BCrypt.Net.BCrypt.EnhancedHashPassword(randomOTP);
+
+                User2faAuth user2FaAuth = new User2faAuth
                 {
-                    return new ResponseTokenViewModel()
-                    {
-                        token = token,
-                        response = "Login successful",
-                        isPersistent = model.RememberMe,
-                        Role = RoleName
-                    };
-                }
+                    TokenAuth = varificationCode,
+                    Email = model.Email,
+                    RememberMe = model.RememberMe,
+                    CreateTime = DateTime.Now,
+                    ExpireTime = DateTime.Now.AddMinutes(5)
+                };
+                _userRepository.AddUser2faAuth(user2FaAuth);
+
+
+                // generating email for user with otp
+                string emailBody = 
+                    $@"
+                    <html>
+                    <body>
+                        <h1>Varification Code</h1>
+                        <p>Dear {user.FirstName},</p>
+                        <p>We received a request to login in userAuth</p>
+                        <p>Here is your varification code : </p>
+                        <h2 style='color:#0565a1;width:100%;display:flex;align-items:center;justify-content:center;'>{randomOTP}</h2>
+                        <p>If you encounter any issue or have any question, please do not hesitate to contact our support team.</p>
+                            <p><span style='color:#8B8000'>Important note:</span> For security purposes, This will expire in 5 minutes. If you did not request a password reset, please ignore this email or contact our support team immediately.</p>
+                        <p>Thank you!</p>
+                    </body>
+                    </html>
+                ";
+
+                await _emailService.SendEmailAsync(
+                    model.Email,
+                    "OTP for login",
+                    emailBody
+                );
+
+                return new ResponsesViewModel()
+                {
+                    IsSuccess = true,
+                    Message = "OTP send successfully!"
+                };
             }
             
-            return new ResponseTokenViewModel()
+            return new ResponsesViewModel()
             {
-                token = "",
-                response = "Invalid User Credentials",
-                isPersistent = model.RememberMe
+                IsSuccess = false,
+                Message = "Invalid User Credentials"
             };
 
         }
         catch(Exception ex)
         {
-            return new ResponseTokenViewModel()
+            return new ResponsesViewModel()
             {
-                token = "",
-                response = $"Error 500 : Internal Server Error {ex.Message}",
-                isPersistent = false
+                IsSuccess = false,
+                Message = $"Error 500 : Internal Server Error {ex.Message}"  
             };
         }
     }
