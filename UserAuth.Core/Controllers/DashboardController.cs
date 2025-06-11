@@ -196,5 +196,49 @@ public class DashboardController : Controller
             return Json(new { success = false, message = ex.Message });
         }
     }
+
+
+    public IActionResult Message(int messageTo)
+    {   
+        try{
+            
+            User? user = _userService.GetUserById(messageTo);
+            MessageViewModel message = new () {
+                user = user,
+                sendTo = messageTo
+            };
+            return View(message);
+
+            
+        }catch(Exception e)
+        {
+            throw new Exception(e.Message);
+        }
+    }
+
+    [HttpPost]
+    public IActionResult SendMessage(MessageViewModel model)
+    {
+        try
+        {
+            string? email =  User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value;
+            ResponsesViewModel res = _userService.SendMessage(model, email);
+            if(res.IsSuccess)
+            {
+                return Json(new {success = true, message = res.Message});
+            }
+            return Json(new {success = false, message = res.Message});
+        }catch(Exception e)
+        {
+            return Json(new {success = false, message = $"{e.Message}"});
+        }
+    }
+
+    // [HttpGet]
+    // public IActionResult ReciveMessage()
+    // {
+
+    // }
+
 }
 

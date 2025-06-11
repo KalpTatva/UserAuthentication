@@ -15,6 +15,8 @@ public partial class UserAuthContext : DbContext
     {
     }
 
+    public virtual DbSet<Message> Messages { get; set; }
+
     public virtual DbSet<PasswordResetRequest> PasswordResetRequests { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
@@ -29,6 +31,23 @@ public partial class UserAuthContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Message>(entity =>
+        {
+            entity.HasKey(e => e.MessageId).HasName("messages_pkey");
+
+            entity.ToTable("messages");
+
+            entity.Property(e => e.MessageId).HasColumnName("message_id");
+            entity.Property(e => e.CreatedAt)
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("created_at");
+            entity.Property(e => e.MessagePayload)
+                .HasColumnType("character varying")
+                .HasColumnName("message_payload");
+            entity.Property(e => e.ReciverId).HasColumnName("reciver_id");
+            entity.Property(e => e.SenderId).HasColumnName("sender_id");
+        });
+
         modelBuilder.Entity<PasswordResetRequest>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("password_reset_requests_pkey");

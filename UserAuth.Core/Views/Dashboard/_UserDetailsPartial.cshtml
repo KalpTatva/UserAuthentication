@@ -34,6 +34,7 @@
                                 {
                                     <a class="btn btn-danger delete-user-btn" data-user-id="@user.UserId">Delete</a>
                                 }
+                                <a class="btn btn-success" asp-action="Message" asp-controller="Dashboard" asp-route-messageTo="@user.UserId">Message</a>
 
                             </td>
                         </tr>

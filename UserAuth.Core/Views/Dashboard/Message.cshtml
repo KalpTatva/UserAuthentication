@@ -1,0 +1,36 @@
+@{
+    Layout = "~/Views/Shared/_Dashboard.cshtml";
+}
+@model UserAuth.Repository.ViewModels.MessageViewModel
+<div class="d-flex w-100 justify-content-between container mt-4">
+    <h3> Message to @Model.user.FirstName @Model.user.LastName</h3>
+    <a asp-controller="Dashboard" asp-action="UserDetails" class="btn btn-secondary mt-2">Back to users</a>
+
+</div>
+<div class="d-flex w-100  container mt-4">
+
+    <form action="POST" id="SendMessage">
+        <div class="d-flex justify-content-center align-items-center gap-3">
+            <input type="hidden" asp-for="sendTo" value="@Model.sendTo">
+            <div class="form-floating has-validation">
+                <input type="text" class="form-control" id="Message" placeholder="Write message here..."asp-for="Message">
+                <span asp-validation-for="Message" class="text-danger float-start"></span>
+                <label for="Message">Write message here...</label>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-success">Send</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+@section scripts{
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        window.successMessage = '@TempData["SuccessMessage"]';
+        window.errorMessage = '@TempData["ErrorMessage"]';
+    </script>
+    <script src="~/js/toastr_script.js"></script>
+    <script src="~/js/message_Script.js"></script>
+}

@@ -245,5 +245,16 @@ public class UserRepository: IUserRepository
         _context.User2faAuths.RemoveRange(user2FaAuths);
         _context.SaveChanges();
     }
+
+    public void SaveMessage(Message message)
+    {
+        try{
+            _context.Messages.Add(message);
+            _context.SaveChanges();
+        }catch(Exception ex)
+        {
+            throw new Exception("An error occurred while adding message. ", ex);   
+        }
+    }
 }
 
