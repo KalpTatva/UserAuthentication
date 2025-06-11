@@ -19,6 +19,8 @@ public partial class UserAuthContext : DbContext
 
     public virtual DbSet<User> Users { get; set; }
 
+    public virtual DbSet<User2faAuth> User2faAuths { get; set; }
+
     public virtual DbSet<UsersHistory> UsersHistories { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -100,6 +102,33 @@ public partial class UserAuthContext : DbContext
             entity.Property(e => e.UserName)
                 .HasMaxLength(255)
                 .HasColumnName("user_name");
+        });
+
+        modelBuilder.Entity<User2faAuth>(entity =>
+        {
+            entity.HasKey(e => e.Userid).HasName("user_2fa_auth_pkey");
+
+            entity.ToTable("user_2fa_auth");
+
+            entity.Property(e => e.Userid).HasColumnName("userid");
+            entity.Property(e => e.Counting)
+                .HasDefaultValue(0)
+                .HasColumnName("counting");
+            entity.Property(e => e.CreateTime)
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("create_time");
+            entity.Property(e => e.Email)
+                .HasColumnType("character varying")
+                .HasColumnName("email");
+            entity.Property(e => e.ExpireTime)
+                .HasColumnType("timestamp without time zone")
+                .HasColumnName("expire_time");
+            entity.Property(e => e.RememberMe)
+                .HasDefaultValue(false)
+                .HasColumnName("remember_me");
+            entity.Property(e => e.TokenAuth)
+                .HasColumnType("character varying")
+                .HasColumnName("token_auth");
         });
 
         modelBuilder.Entity<UsersHistory>(entity =>

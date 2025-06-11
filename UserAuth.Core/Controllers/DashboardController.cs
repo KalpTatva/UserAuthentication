@@ -39,6 +39,7 @@ public class DashboardController : Controller
     // [Authorize(Policy = "PublicAccess")]
     // [Authorize(Policy = "AdminOnly")]
     // [Authorize(Policy = "UserOnly")]
+    [Authorize(Roles = "Admin")]
     [HttpGet]
     public async Task<IActionResult> GetAllUserDetails()
     {
@@ -60,6 +61,7 @@ public class DashboardController : Controller
     }
 
     // Method for edit user details (get user details)
+    [Authorize(Roles = "Admin")]
     [HttpGet]
     public IActionResult EditUser(int userId)
     {
@@ -95,6 +97,7 @@ public class DashboardController : Controller
 
     
     // Method for updating user details (update details)
+    [Authorize(Roles = "Admin")]
     [HttpPut]
     public IActionResult EditUser(User user)
     {
@@ -126,6 +129,7 @@ public class DashboardController : Controller
 
 
     // Method for deleting user (soft delete)
+    [Authorize(Roles = "Admin")]
     [HttpPut]
     public IActionResult DeleteUser(int userId)
     {
@@ -149,7 +153,7 @@ public class DashboardController : Controller
         }
     }
 
-
+    [Authorize(Roles = "Admin")]
     public IActionResult UserDetails()
     {
         return View();
@@ -167,12 +171,13 @@ public class DashboardController : Controller
 
 
     #endregion
-
+    [Authorize(Roles = "Admin")]
     public IActionResult Logs()
     {
         return View();
     }
-
+    
+    [Authorize(Roles = "Admin")]
     [HttpGet]
     public IActionResult LogsDetails()
     {

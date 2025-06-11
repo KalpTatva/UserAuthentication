@@ -1,7 +1,7 @@
 namespace UserAuth.Repository.ViewModels;
 
 // fatching user details from database (helper model for User)
-public class UserDetialsViewModel
+public class UserDetialsViewModel : BaseViewModel
 {
     public int UserId { get; set; }
 
