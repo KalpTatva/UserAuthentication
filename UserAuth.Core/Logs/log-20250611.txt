@@ -88,3 +88,138 @@ System.NullReferenceException: Object reference not set to an instance of an obj
    at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware.Invoke(HttpContext context)
    at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-06-11 11:12:46.671 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-11 11:12:51.404 +05:30 [INF] User logged out successfully.
+2025-06-11 11:12:51.411 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-11 11:13:28.484 +05:30 [WRN] 404 Not Found error occurred.
+2025-06-11 11:13:31.878 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-11 11:13:34.271 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-11 11:13:42.618 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-11 11:13:48.176 +05:30 [WRN] 404 Not Found error occurred.
+2025-06-11 11:13:51.704 +05:30 [WRN] 404 Not Found error occurred.
+2025-06-11 11:13:54.583 +05:30 [WRN] 404 Not Found error occurred.
+2025-06-11 11:14:01.994 +05:30 [WRN] 404 Not Found error occurred.
+2025-06-11 11:14:04.997 +05:30 [WRN] 404 Not Found error occurred.
+2025-06-11 11:14:11.046 +05:30 [WRN] 404 Not Found error occurred.
+2025-06-11 11:14:15.739 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.MissingMethodException: Attempted to invoke a deleted method implementation. This can happen when a method is deleted or its name or signature is changed while the application is running.
+   at UserAuth.Core.Controllers.HomeController.User2FaAuth(String Email)
+   at lambda_method212(Closure, Object, Object[])
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-06-11 11:14:23.576 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+System.MissingMethodException: Attempted to invoke a deleted method implementation. This can happen when a method is deleted or its name or signature is changed while the application is running.
+   at UserAuth.Core.Controllers.HomeController.User2FaAuth(String Email)
+   at lambda_method212(Closure, Object, Object[])
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResourceFilter>g__Awaited|25_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResourceExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeFilterPipelineAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-06-11 11:15:59.561 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-11 11:18:03.850 +05:30 [ERR] An unhandled exception has occurred while executing the request.
+2025-06-11 11:18:03.859 +05:30 [ERR] An exception was thrown attempting to display the error page.
+System.TypeLoadException: Could not resolve type 'AspNetCoreGeneratedDocument.Views_Home_User2FaAuth' in assembly 'UserAuth.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null'.
+   at System.Reflection.TypeNameParser.GetTypeFromDefaultAssemblies(String typeName, ReadOnlySpan`1 nestedTypeNames)
+   at System.Reflection.TypeNameParser.GetType(String typeName, ReadOnlySpan`1 nestedTypeNames, String assemblyNameIfAny)
+   at System.Reflection.TypeNameParser.NestedNamespaceTypeName.ResolveType(TypeNameParser& parser, String containingAssemblyIfAny)
+   at System.Reflection.TypeNameParser.Parse()
+   at System.Reflection.TypeNameParser.GetTypeHelper(Char* pTypeName, RuntimeAssembly requestingAssembly, Boolean throwOnError, Boolean requireAssemblyQualifiedName)
+   at System.Reflection.CustomAttribute._CreateCaObject(RuntimeModule pModule, RuntimeType type, IRuntimeMethodInfo pCtor, Byte** ppBlob, Byte* pEndBlob, Int32* pcNamedArgs)
+   at System.Reflection.CustomAttribute.AddCustomAttributes(ListBuilder`1& attributes, RuntimeModule decoratedModule, Int32 decoratedMetadataToken, RuntimeType attributeFilterType, Boolean mustBeInheritable, ListBuilder`1 derivedAttributes)
+   at System.Reflection.CustomAttribute.GetCustomAttributes(RuntimeMethodInfo method, RuntimeType caType, Boolean inherit)
+   at System.Attribute.GetCustomAttributes(MemberInfo element, Type attributeType, Boolean inherit)
+   at System.Reflection.CustomAttributeExtensions.GetCustomAttributes[T](MemberInfo element)
+   at Microsoft.Extensions.StackTrace.Sources.StackTraceHelper.TryResolveStateMachineMethod(MethodBase& method, Type& declaringType)
+   at Microsoft.Extensions.StackTrace.Sources.StackTraceHelper.GetMethodDisplayString(MethodBase method)
+   at Microsoft.Extensions.StackTrace.Sources.StackTraceHelper.GetFrames(Exception exception, AggregateException& error)
+   at Microsoft.Extensions.StackTrace.Sources.ExceptionDetailsProvider.GetStackFrames(Exception original)
+   at Microsoft.Extensions.StackTrace.Sources.ExceptionDetailsProvider.GetDetails(Exception exception)+MoveNext()
+   at Microsoft.AspNetCore.Diagnostics.RazorViews.ErrorPage.ExecuteAsync()
+   at Microsoft.Extensions.RazorViews.BaseView.ExecuteAsync(HttpContext context)
+   at Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddlewareImpl.Invoke(HttpContext context)
+2025-06-11 11:18:03.870 +05:30 [ERR] Connection id "0HND8LCV5EKLM", Request id "0HND8LCV5EKLM:00000003": An unhandled exception was thrown by the application.
+2025-06-11 11:42:34.917 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-11 11:43:08.372 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-11 11:43:08.725 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-11 11:45:23.603 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-11 11:45:40.728 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-11 11:47:03.648 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-11 13:16:25.003 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-11 13:16:25.332 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-11 13:20:05.970 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-11 13:20:35.128 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-11 13:20:35.503 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-11 13:22:37.116 +05:30 [WRN] 404 Not Found error occurred.
+2025-06-11 13:24:20.931 +05:30 [INF] User logged out successfully.
+2025-06-11 13:24:20.937 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-11 13:25:35.446 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-11 13:25:35.767 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-11 13:26:23.386 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-11 13:29:13.267 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-11 13:29:13.593 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-11 13:30:36.381 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-11 13:34:56.734 +05:30 [INF] User logged out successfully.
+2025-06-11 13:34:56.742 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-11 13:36:33.769 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-11 13:36:34.183 +05:30 [INF] User logged out successfully.
+2025-06-11 13:36:34.229 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-11 14:32:28.098 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-11 14:32:32.500 +05:30 [INF] User logged out successfully.
+2025-06-11 14:32:32.517 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-11 14:38:26.891 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-11 14:41:25.533 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-11 15:06:17.276 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-11 15:06:58.266 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-11 15:07:00.670 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-11 15:11:18.648 +05:30 [WRN] 404 Not Found error occurred.
+2025-06-11 15:12:48.786 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-11 15:12:51.634 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-11 15:12:54.057 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-11 15:17:50.904 +05:30 [WRN] 404 Not Found error occurred.
+2025-06-11 15:18:19.818 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-11 15:19:17.676 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-11 15:24:19.271 +05:30 [WRN] 404 Not Found error occurred.
+2025-06-11 15:25:03.604 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-11 15:25:05.303 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-11 15:25:30.070 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-11 15:26:50.734 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-11 15:26:51.062 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-11 15:34:45.141 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-11 15:34:47.329 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-11 15:35:41.458 +05:30 [INF] User logged out successfully.
+2025-06-11 15:35:41.466 +05:30 [INF] User is not authenticated, redirecting to login page.
+2025-06-11 15:41:21.130 +05:30 [INF] User is not authenticated, redirecting to login page.

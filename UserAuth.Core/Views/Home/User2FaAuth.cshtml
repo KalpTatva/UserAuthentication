@@ -1,0 +1,49 @@
+@model UserAuth.Repository.ViewModels.User2FAViewModel
+<div class="LoginContent">
+    <h1 class="display-4 mb-4">
+        <h3>Verify Code</h3>
+    </h1>
+    <div class="w-100">
+        <form asp-action="User2faAuth" asp-controller="Home" method="post" class="d-flex flex-column">
+
+            <input id="EmailInputHidden" asp-for="ToEmail" type="hidden" value="@Model.ToEmail" />
+
+
+            <!-- New Password Field -->
+            <div class="form-floating my-2">
+                <input asp-for="Token" type="text" class="form-control" id="Token"
+                    placeholder="Enter varification code">
+                <label for="Token">code</label>
+                <span asp-validation-for="Token" class="text-danger"></span>
+            </div>
+
+
+            <div class="my-3">
+                <h6 class="text-success">Time Remaining: <span class="text-success" id="countdown-timer"></span></h6>
+            </div>
+            <!-- Error Message Display -->
+            <div class="text-danger">@TempData["ErrorMessage"]</div>
+
+            <div class="">
+                <button type="submit" class="w-100 btn btn-color text-white rounded-3">
+                    Submit
+                </button>
+            </div>
+            <a class="text-decoration-none text-center mt-3" asp-action="Index" asp-controller="Home">back to login</a>
+
+        </form>
+    </div>
+</div>
+
+
+@section scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        window.successMessage = '@TempData["SuccessMessage"]';
+        window.errorMessage = '@TempData["ErrorMessage"]';
+        window.CountdownTime = @ViewBag.CountdownTime;
+    </script>
+    <script src="~/js/auth_script.js"></script>
+    <script src="~/js/toastr_script.js"></script>
+
+}

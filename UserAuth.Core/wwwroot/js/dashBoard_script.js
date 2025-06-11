@@ -15,13 +15,13 @@ $(document).ready(function() {
             url: '/Dashboard/GetAllUserDetails',
             type: 'GET',
             success: function(data) {
-            $('#UserContent').html(data);
-            $('.loader').hide(); 
+                $('#UserContent').html(data);
+                $('.loader').hide(); 
             },
             error: function(xhr, status, error) {
-            console.error('Error fetching user details:', error);
-            $('#UserContent').html('<p class="text-danger">Failed to load user details.</p>');
-            $('.loader').hide(); 
+                console.error('Error fetching user details:', error);
+                $('#UserContent').html('<p class="text-danger">Failed to load user details.</p>');
+                $('.loader').hide(); 
             }
         });
         

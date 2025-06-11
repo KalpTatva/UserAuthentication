@@ -5,7 +5,10 @@ namespace UserAuth.Service.interfaces;
 
 public interface IUserService 
 {
-    Task<ResponsesViewModel> UserLogin(LoginViewModel model);
+    Task<ResponsesViewModel?> UserLogin(LoginViewModel model);
+
+    ResponseTokenViewModel Validate2faToken(User2FAViewModel model);
+
     Task<List<User>?> GetAllUserDetails();
     Task<ResponsesViewModel> ForgetPassword(EmailViewModel email);
     ResponsesViewModel ValidateResetPasswordToken(string token);
@@ -27,5 +30,9 @@ public interface IUserService
 
     // users log history
     List<UsersHistory> LogUserHistory();
+
+    // method for deleting all auth token which are generated for 2 factor authentication
+    bool Delete2FaAuth(string Email);
+    
 
 }

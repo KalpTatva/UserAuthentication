@@ -79,6 +79,75 @@ public class HomeController : Controller
         }
     }
 
+    
+    [HttpGet]
+    public IActionResult User2FaAuth(string Email)
+    {
+        if (!SessionUtils.IsTimerAvailable(HttpContext))
+        {
+            SessionUtils.SetTimer(HttpContext, DateTime.UtcNow.ToString());
+        }
+
+        // utility function which find the remaining time of user
+        // for 2 FA authentication
+        ViewBag.CountdownTime = SessionUtils.GetRemainingTimer(HttpContext);
+
+        User2FAViewModel emailViewModel = new User2FAViewModel();
+    
+        emailViewModel.ToEmail = Email;
+
+        return View(emailViewModel);
+    }
+
+    [HttpPost]
+    public IActionResult User2faAuth(User2FAViewModel model)
+    {
+        try
+        {
+            if(ModelState.IsValid)
+            {
+                ResponseTokenViewModel? isValidToken = _userService.Validate2faToken(model);
+                if (isValidToken != null && isValidToken?.token?.Length > 0)
+                {
+                    CookieUtils.SetJwtCookie(Response, isValidToken.token, isValidToken.isPersistent);
+                    SessionUtils.RemoveTimer(HttpContext);
+                    
+                    TempData["success"] = "logged in";
+                    return RedirectToAction("Index", "Home");
+                }
+                if(isValidToken != null && isValidToken.response != "Login successful")
+                {
+                    if(isValidToken.response == "Token expired")
+                    {
+                        SessionUtils.RemoveTimer(HttpContext);
+                        
+                        TempData["SuccessMessage"] = "Login successfully!";
+                        return RedirectToAction("Index");
+                    }
+
+                    if (!SessionUtils.IsTimerAvailable(HttpContext))
+                    {
+                        SessionUtils.SetTimer(HttpContext, DateTime.UtcNow.ToString());
+                    }
+
+                    // utility function which find the remaining time of user
+                    // for 2 FA authentication
+                    ViewBag.CountdownTime = SessionUtils.GetRemainingTimer(HttpContext);
+
+                    TempData["ErrorMessage"] = isValidToken.response;
+                    return View(model);
+                }
+                TempData["ErrorMessage"] = "Invalid code! Try again";
+            }
+            return View(model);
+
+        }
+        catch(Exception ex)
+        {
+            TempData["ErrorMessage"] = $"authentication failed. {ex.Message}";
+            return View(model);
+        }
+    }
 
     // method for logout
     public IActionResult Logout()
@@ -86,6 +155,25 @@ public class HomeController : Controller
         CookieUtils.ClearCookies(Response);
         _logger.LogInformation("User logged out successfully.");
         return RedirectToAction("Index", "Home");
+    }
+
+    // method for deleting all the token which are generated for 
+    // 2FA login but not used
+    [HttpPost]
+    public IActionResult Delete2FaAuth(string Email)
+    {
+        try{
+            bool response = _userService.Delete2FaAuth(Email);
+            if(response)
+            {
+                return Json(new { success = true, message = "Time out! please try again" });
+            }
+
+            return Json(new { success = false, message = "Error while user authentication!" });
+
+        }catch(Exception ex){
+            return Json(new { success = false, message = $"Error while user authentication! : {ex.Message}" });
+        }
     }
 
     #endregion

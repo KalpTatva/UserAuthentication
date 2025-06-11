@@ -45,7 +45,7 @@ public class UserService : IUserService
                 // adding otp to the db with expire within 5 minutes
 
                 Random rondom = new Random();
-                string randomOTP = rondom.Next(100001,100000).ToString(); // generates random opt
+                string randomOTP = rondom.Next(100001,1000000).ToString(); // generates random opt
                 string varificationCode = BCrypt.Net.BCrypt.EnhancedHashPassword(randomOTP);
 
                 User2faAuth user2FaAuth = new User2faAuth
@@ -85,7 +85,7 @@ public class UserService : IUserService
                 return new ResponsesViewModel()
                 {
                     IsSuccess = true,
-                    Message = "OTP send successfully!"
+                    Message = "OTP send successfully! please check your email"
                 };
             }
             
@@ -103,6 +103,70 @@ public class UserService : IUserService
                 IsSuccess = false,
                 Message = $"Error 500 : Internal Server Error {ex.Message}"  
             };
+        }
+    }
+
+    // 2 factor authentication service
+    public ResponseTokenViewModel Validate2faToken(User2FAViewModel model)
+    {
+        try
+        {
+            User2faAuth user2FaAuth = _userRepository.GetUser2faAuth(model.ToEmail.Trim());
+            User? user = _userRepository.GetUserByEmail(model.ToEmail.Trim().ToLower());
+
+            if(user2FaAuth != null)
+            {
+                // delete the token (tokens) if time is expired 
+                if(user2FaAuth.ExpireTime < DateTime.Now || user2FaAuth.Counting >=3)
+                {
+                    _userRepository.DeleteALlAuthTokenByEmail(model.ToEmail.Trim().ToLower());
+                    return new ResponseTokenViewModel()
+                    {
+                        token = "",
+                        response = "Token expired",
+                    };
+                }
+                else
+                {
+                    if(BCrypt.Net.BCrypt.EnhancedVerify(model.Token, user2FaAuth.TokenAuth))
+                    {
+                        string? roleName = user != null && user.Role != 0 ? ((UserRole)user.Role).ToString() : null;
+
+                        var TokenExpireTime = user2FaAuth.RememberMe == true
+                                ? DateTime.Now.AddDays(30)
+                                : DateTime.Now.AddDays(1);
+                            var token = GenerateJwtToken(model.ToEmail, TokenExpireTime, roleName ?? "");
+                            
+                            // deleting all tokens which are generated for this email
+                            _userRepository.DeleteALlAuthTokenByEmail(model.ToEmail.Trim().ToLower());
+                            
+                            if (token != null)
+                            {
+                                return new ResponseTokenViewModel()
+                                {
+                                    token = token,
+                                    isPersistent = user2FaAuth.RememberMe ?? false,
+                                    response = "Login successful",
+                                };
+                            }
+                    }else{
+                        // update the count of the token 
+                        // only 3 tries are allowed
+                        user2FaAuth.Counting += 1;
+                        _userRepository.UpdateUser2faAuth(user2FaAuth);
+                        return new ResponseTokenViewModel()
+                        {
+                            token = "",
+                            response = $"Invalid User Credentials! only {3-user2FaAuth.Counting} are left",
+                        }; 
+                    }
+                }
+            }
+            return new ResponseTokenViewModel() { token = "", response = "Token expired" };
+        }
+        catch(Exception ex)
+        {
+           throw new Exception($"Error in LoginService: {ex.Message}"); 
         }
     }
 
@@ -421,7 +485,6 @@ public class UserService : IUserService
         }
     }
 
-
     // edit users
     public User GetUserById(int userId)
     {
@@ -556,8 +619,7 @@ public class UserService : IUserService
         }
     }
 
-
-
+    // log histories
     public List<UsersHistory> LogUserHistory()
     {
         try{
@@ -570,4 +632,19 @@ public class UserService : IUserService
             throw new Exception(ex.Message);
         }
     }
+
+    // method for deleting all auth token which are generated for 2 factor authentication
+    public bool Delete2FaAuth(string Email)
+    {
+        try
+        {
+            _userRepository.DeleteALlAuthTokenByEmail(Email.Trim().ToLower());
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
 }

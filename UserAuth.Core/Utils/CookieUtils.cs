@@ -2,8 +2,12 @@ namespace UserAuth.Core.Utils;
 
 public class CookieUtils
 {
-
-    // Method for setting up cookie
+    ///<summary>
+    /// Method for setting up cookie
+    ///</summary>
+    ///<param name="httpContext"></param>
+    ///<param name="token"></param>
+    ///<param name="isPersistent"></param>
     public static void SetJwtCookie(HttpResponse response, string token, bool isPersistent = false)
     {
         var cookieOptions = new CookieOptions
@@ -15,7 +19,10 @@ public class CookieUtils
     }
 
 
-    // Method for clearing cookie
+    ///<summary>
+    /// Method for clearing cookie
+    ///</summary>
+    ///<param name="httpContext"></param>
     public static void ClearCookies(HttpResponse response)
     {
        response.Cookies.Delete("auth_token");

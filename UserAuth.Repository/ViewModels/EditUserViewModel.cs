@@ -3,7 +3,7 @@ using UserAuth.Repository.CustomValidation;
 
 namespace UserAuth.Repository.ViewModels;
 
-public class EditUserViewModel
+public class EditUserViewModel : BaseViewModel
 {
 
     [Required(ErrorMessage = "Username is required")]

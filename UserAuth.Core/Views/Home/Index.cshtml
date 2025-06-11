@@ -3,7 +3,7 @@
     <h1 class="display-4 ">Welcome,</h1>
     <h1 class="display-4 mb-4">Login here</h1>
     <div class="w-100">
-        <form asp-action="Index" asp-controller="Home" method="post" class="d-flex flex-column">
+        <form asp-action="Index" asp-controller="Home" method="post" class="d-flex flex-column inputlogin">
             <div class=" has-validation my-2 mb-4 w-100">
                 <input type="text" class="form-control" placeholder="Email" asp-for="Email" >
                 <span asp-validation-for="Email" class="text-danger float-start"></span>
@@ -32,7 +32,10 @@
             </div>
 
             <div class="">
-                <button type="submit" class="w-100 btn btn-color text-white rounded-3">Login</button>
+                <button type="submit" class="w-100 btn btn-color text-white rounded-3">
+                    <span class="login">Login</span>
+                    <span class="loader2 " style="width: 20px; height: 20px;"></span>
+                </button>
 
             </div>
         </form>
@@ -49,6 +52,16 @@
     <script>
         window.successMessage = '@TempData["SuccessMessage"]';
         window.errorMessage = '@TempData["ErrorMessage"]';
+
+        $(document).ready(function(){
+            $(".login").show();
+            $(".loader2").hide();
+
+            $(document).on('submit', '.inputlogin', function () {
+                $(".login").hide();
+                $(".loader2").show();
+            });
+        })
     </script>
     <script src="~/js/toastr_script.js"></script>
 }

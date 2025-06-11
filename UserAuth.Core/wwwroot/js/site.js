@@ -47,4 +47,6 @@ $(document).ready(function () {
         e.preventDefault();
         LogoutModal.show();
     });
+
+
 });

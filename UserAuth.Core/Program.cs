@@ -83,15 +83,22 @@ builder.Services.AddAuthorization(options =>
     
 });
 
-// serilog - Logger
+// serilog - Logger : singleton service example
 Log.Logger = new LoggerConfiguration()
             .ReadFrom.Configuration(builder.Configuration)
             .WriteTo.Console()
             .WriteTo.File("Logs/log-.txt")
             .CreateLogger();
-
 builder.Host.UseSerilog();
 builder.Services.AddSingleton<Serilog.ILogger>(Log.Logger);
+
+// Add session services
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Set session timeout
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 var app = builder.Build();
 
@@ -107,6 +114,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseSession();
 
 app.UseStatusCodePages(async context =>
 {

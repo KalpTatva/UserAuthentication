@@ -228,5 +228,22 @@ public class UserRepository: IUserRepository
             return false;
         }
     }
+
+    // DB call for select User2faAuth by email
+    public User2faAuth GetUser2faAuth(string email)
+    {
+        User2faAuth? result = _context.User2faAuths
+            .Where(f => f.Email.Contains(email))
+            .FirstOrDefault();
+
+        return result ?? new User2faAuth();
+    }
+
+    public void DeleteALlAuthTokenByEmail(string email)
+    {
+        List<User2faAuth> user2FaAuths = _context.User2faAuths.Where(f => f.Email.Contains(email)).ToList();
+        _context.User2faAuths.RemoveRange(user2FaAuths);
+        _context.SaveChanges();
+    }
 }
 

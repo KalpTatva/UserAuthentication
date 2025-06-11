@@ -18,4 +18,6 @@ public interface IUserRepository
     bool DeleteUser(int userId,int DeleteUser);
     bool UpdateUserSP(User user,int userid);
     List<UsersHistory> GetUserHistroryLog();
+    User2faAuth GetUser2faAuth(string email);
+    void DeleteALlAuthTokenByEmail(string email);
 }
