@@ -649,35 +649,5 @@ public class UserService : IUserService
     }
 
 
-    public ResponsesViewModel SendMessage(MessageViewModel model, string email)
-    {
-        try{
-            if(model!=null)
-            {
-                User? user = _userRepository.GetUserByEmail(email.Trim().ToLower());
-                Message message = new (){
-                    CreatedAt = DateTime.Now,
-                    SenderId = user.UserId,
-                    ReciverId = model.sendTo,
-                    MessagePayload = model.Message ?? "",
-                };
-
-                _userRepository.SaveMessage(message);
-                
-                return new ResponsesViewModel()
-                {
-                    IsSuccess = true,
-                    Message = "Message sent successfully" // when user update fails
-                };
-            }
-            return new ResponsesViewModel()
-            {
-                IsSuccess = false,
-                Message = "Enter valid details" 
-            };
-        }catch(Exception e)
-        {
-            throw new Exception(e.Message);
-        }
-    }
+    
 }

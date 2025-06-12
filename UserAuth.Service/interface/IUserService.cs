@@ -32,10 +32,6 @@ public interface IUserService
     List<UsersHistory> LogUserHistory();
 
     // method for deleting all auth token which are generated for 2 factor authentication
-    bool Delete2FaAuth(string Email);
-
-
-    ResponsesViewModel SendMessage(MessageViewModel model, string email);
-    
+    bool Delete2FaAuth(string Email);  
 
 }

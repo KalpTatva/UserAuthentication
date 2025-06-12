@@ -41,9 +41,11 @@ builder.Services.AddScoped<IDbConnection>(sp =>
 // service registration
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IDashBoardSerivice, DashBoardSerivice>();
 
 // repository registration
 builder.Services.AddScoped(typeof(IUserRepository), typeof(UserRepository));
+builder.Services.AddScoped(typeof(IDashboardRepository), typeof(DashboardRepository));
 
 // jwt authorization
 builder.Services.AddAuthentication(options =>

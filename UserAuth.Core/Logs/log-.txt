@@ -680,3 +680,5 @@ UserAuth.Core.Controllers.DashboardController.Message (UserAuth.Core)
 2025-06-11 17:47:27.054 +05:30 [WRN] Failed to determine the https port for redirect.
 2025-06-11 18:05:37.484 +05:30 [WRN] Failed to determine the https port for redirect.
 2025-06-11 18:14:22.171 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-12 09:06:27.554 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-12 09:46:51.566 +05:30 [WRN] Failed to determine the https port for redirect.

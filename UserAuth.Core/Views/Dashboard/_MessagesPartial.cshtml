@@ -1,0 +1,21 @@
+@model List<UserAuth.Repository.Models.Message>
+@using UserAuth.Repository.Models;
+
+<div>
+    @if(Model != null && Model.Any())
+    {
+        @foreach(Message message in Model)
+        {
+            <div>
+                <span class="text-success">
+                    message send from @message.SenderId to @message.ReciverId
+                </span>
+                <h6>@message.MessagePayload</h6>
+            </div>
+        }
+    }else{
+        <div>
+            <h4 class="text-secondary">No message found</h4>
+        </div>
+    }
+</div>    

@@ -20,5 +20,5 @@ public interface IUserRepository
     List<UsersHistory> GetUserHistroryLog();
     User2faAuth GetUser2faAuth(string email);
     void DeleteALlAuthTokenByEmail(string email);
-    void SaveMessage(Message message);
+    
 }

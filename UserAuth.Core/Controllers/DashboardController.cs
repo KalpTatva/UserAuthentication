@@ -10,9 +10,11 @@ namespace UserAuth.Core.Controllers;
 public class DashboardController : Controller
 {
     private readonly IUserService _userService;
-    public DashboardController(IUserService userService)
+    private readonly IDashBoardSerivice _dashboardService;
+    public DashboardController(IUserService userService, IDashBoardSerivice dashboardService)
     {
         _userService = userService;
+        _dashboardService = dashboardService;
     }
 
     #region Admin
@@ -222,7 +224,7 @@ public class DashboardController : Controller
         try
         {
             string? email =  User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value;
-            ResponsesViewModel res = _userService.SendMessage(model, email);
+            ResponsesViewModel res = _dashboardService.SendMessage(model, email);
             if(res.IsSuccess)
             {
                 return Json(new {success = true, message = res.Message});
@@ -234,11 +236,25 @@ public class DashboardController : Controller
         }
     }
 
-    // [HttpGet]
-    // public IActionResult ReciveMessage()
-    // {
-
-    // }
+    // [Authorize(Roles = "Admin")]
+    [HttpGet]
+    public IActionResult ReciveMessageAdmin(int messageTo)
+    {
+        try
+        {
+            string? email =  User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value;
+            List<Message>? messages = _dashboardService.ReciveMessageAtAdmin(messageTo, email ?? "");
+            if(messages != null && messages.Any())
+            {
+                return PartialView("_MessagesPartial",messages);
+            }
+            return Json(new {success = false, message = "Error occured while fetching messages"});
+        }
+        catch(Exception e)
+        {
+            return Json(new {success = false, message = $"{e.Message}"});
+        }
+    }
 
 }
 
